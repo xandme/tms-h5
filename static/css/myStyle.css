@@ -1,0 +1,151 @@
+.icon {
+    width: 1em;
+    height: 1em;
+    vertical-align: -0.15em;
+    fill: currentColor;
+    overflow: hidden;
+}
+.list-group-item{
+    padding: 15px;
+    border-width: 1px 0;
+}
+.list-group-item:first-child{
+    border-radius: 0;
+}
+.my-list-group{
+    padding-left: 20px;
+}
+.my-head{
+    background-color: #9d9d9d;
+    padding-top: 10px;
+}
+.my-middle{
+    margin: 15px 0;
+    color: black;
+}
+.my-middle-list {
+    float: right;
+    color: #9d9d9d;
+    font-family: "Gill Sans MT";
+    font-size: 12px;
+}
+.back-opacity {
+    background-color:#9d9d9d;
+    /*filter:Alpha(opacity=10);*/
+}
+/*div {font-family: "Kristen ITC";}*/
+html, body {width:100%;height:100%;} /*非常重要的样式让背景图片100%适应整个屏幕*/
+.bg {display: table;width: 100%;height: 100%;padding: 100px 0;text-align: center;color: #eeeeee;background: url(/img/img2.jpg) no-repeat bottom center;background-color: #eeeeee;background-size: cover;}
+.my-navbar {padding:10px 0;transition: background 0.5s ease-in-out, padding 0.5s ease-in-out;}
+.my-navbar a{background:transparent !important;color:#fff !important}
+.my-navbar a:hover {color:#45bcf9 !important;background:transparent;outline:0}
+.my-navbar a {transition: color 0.5s ease-in-out;}/*-webkit-transition ;-moz-transition*/
+.top-nav {
+    /*padding:0;*/
+    background:#ffffff;
+    border-bottom: 1px solid #8c8c8c;
+}
+button.navbar-toggle {background-color:#fbfbfb;}/*整个背景都是transparent透明的，会看不到，所以再次覆盖一下*/
+button.navbar-toggle > span.icon-bar {background-color:#dedede}
+#bottom-bar a {
+    padding: 8px 15px 5px 15px;
+}
+.icon {
+    width: 20px;
+    height: 20px;
+}
+a.set {
+    padding-left: 30px;
+    padding-top: 5px;
+}
+a.message {
+    float: right;
+    padding-right: 30px;
+    padding-top: 3px;
+}
+.message > svg {
+    width: 22px;
+    height: 22px;
+    /*font-size: 22px;*/
+}
+#title-center {
+    display: none;
+    font-size:20px;
+    text-align: center;
+    margin-left: 104px;
+}
+.list-group-item {
+    padding: 20px 15px;
+}
+.color-gray {
+    background-color: #eeeeee;
+}
+.color-gray > a {
+    color: black;
+}
+#goods-list > li {
+    margin: 10px -5px;
+}
+#home-head > .row {
+    padding: 10px 0;
+}
+#home-head > .row:last-child {
+    padding-bottom: 0;
+}
+#home-head {
+    border-bottom: 1px solid #8c8c8c;
+    background-color: white;
+}
+#home-btn-group {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+#home-btn-group > button {
+    height: 25px;
+    width: 74px;
+    padding-top: 3px;
+}
+#home-head > .row > .col-xs-3 {
+    padding-top: 4px;
+}
+#home-head > .row > .col-xs-3 > a {
+    color: black;
+  }
+.active-border:after {
+    content: '';
+    position: absolute;
+    left: 50px;
+    top: auto;
+    bottom: 0;
+    right: auto;
+    height: 4px;
+    width: 87px;
+    background-color: #8d37e9;
+}
+.buy-ticket {
+    margin-top: 20px;
+}
+#home-film-list {
+    border-top: 1px solid black;
+    border-top-left-radius: 10px;
+    /*border-top-right-radius: 20px;*/
+}
+#home-film-list > .list-group-item:first-child {
+    border-top: none;
+}
+#search-input{
+    background-color: white;
+    border-right: none;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+#login-list > .list-group-item {
+    padding: 10px;
+}
+#login-btn {
+    background-color: #7266ba;
+    border-color: #7266ba;
+    color: white;
+    border-radius: 2px;
+    opacity: 0.65;
+}
