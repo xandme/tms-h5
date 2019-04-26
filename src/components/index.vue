@@ -6,21 +6,19 @@
           <div class="col-xs-3">
             <a href="#">重庆▼</a>
           </div>
-          <div id="home-btn-group" class="col-xs-6 btn-group" role="group" aria-label="head">
-            <button type="button" id="btnFilm" class="btn btn-default active" style="left: 5%;" @click="clickFilm">
-              电影
-            </button>
-            <button type="button" id="btnTheater" class="btn btn-default" style="left: 5%;" @click="clickTheater">
-              影院
-            </button>
-          </div>
-          <div class="col-xs-3">
-            <router-link to="/search">
-              <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-chazhao"></use>
-              </svg>
-            </router-link>
-          </div>
+          <!--<div id="home-btn-group" class="btn-group" role="group" aria-label="head">-->
+            <!--<button type="button" id="btnFilm" class="btn btn-default active" @click="clickFilm">-->
+              <!--电影-->
+            <!--</button>-->
+            <!--<button type="button" id="btnTheater" class="btn btn-default" @click="clickTheater">-->
+              <!--影院-->
+            <!--</button>-->
+          <!--</div>-->
+          <router-link style="float: right;margin-right: 20px;" to="/search">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-chazhao"></use>
+            </svg>
+          </router-link>
         </div>
         <div id="filmHead" class="row text-center" style="color: #0f0f0f;padding-bottom: 0;">
           <div class="film-hot-tab col-xs-6 active-border" @click="cutTab">正在热映</div>
