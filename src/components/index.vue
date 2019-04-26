@@ -37,7 +37,7 @@
         </div>
       </div>
     </nav>
-    <div id="filmBody" class="container-fluid" style="padding-top: 27px;padding-bottom: 50px;">
+    <div id="filmBody" class="container-fluid" style="padding-top: 90px;padding-bottom: 50px;">
       <div class="row">
         <div id="home-film-list" class="col-xs-12 list-group my-list-group">
           <van-list v-model="list[0].loading" :finished="list[0].finished" finished-text="没有更多了" @load="onLoad(0)">
@@ -115,12 +115,6 @@
               </a>
             </div>
           </van-list>
-          <!--<a class="list-group-item row">-->
-          <!--<div class="col-xs-12">影院名称</div>-->
-          <!--<div class="col-xs-12">影院地址</div>-->
-          <!--<div class="col-xs-12">联系电话</div>-->
-          <!--<div class="col-xs-12">收藏标记</div>-->
-          <!--</a>-->
         </div>
       </div>
     </div>
@@ -201,7 +195,6 @@
     },
     methods: {
       cutTab() {
-        console.log("111111111111112")
         const index = 2
         if (index == 2) {
           $('#coming-film-list').show()
@@ -216,7 +209,6 @@
         }
       },
       clickTheater() {
-        console.log("2222222")
         var btnFilm = $("#btnFilm");
         var btnTheater = $("#btnTheater");
         if (btnFilm.hasClass("active")) {

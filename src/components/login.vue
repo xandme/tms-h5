@@ -3,7 +3,6 @@
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container" style="margin-top:15px;">
         <div class="row">
-          <!--<a class="col-xs-1" href="/tms/personal" style="padding-left: 15px;">-->
           <router-link to="/personal">
             <div class="col-xs-1" style="padding-left: 15px;">
               <svg class="icon" aria-hidden="true">
@@ -16,7 +15,7 @@
         </div>
       </div>
     </nav>
-    <div class="container-fluid" style="background-color: #f0f3f4;bottom: 0;height: 100%;padding-top: 113px;">
+    <div class="container-fluid" style="background-color: #f0f3f4;bottom: 0;height: 640px;padding-top: 113px;">
       <div class="row text-center" style="padding-bottom: 35px;">
         <div class="col-lg-offset-7 col-lg-3" style="">
           <img src="@/assets/img/logo.png" alt="" style="height: 130px; border-radius: 10px;">

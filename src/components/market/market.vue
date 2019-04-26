@@ -2,7 +2,7 @@
   <div>
     <div class="row"
          style="background-color:white;position: fixed;z-index:1030;padding: 60px 15px 0;border-bottom:1px solid gray;width: 100%;">
-      <div class="col-xs-12" style="">南岸区竖店电影城.<a href="/tms/theaterList">切换</a></div>
+      <div class="col-xs-12" style="">南岸区竖店电影城.<router-link to="/theater">切换</router-link></div>
     </div>
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container" style="margin-top:15px;">

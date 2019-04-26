@@ -15,7 +15,7 @@
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container" style="margin-top:15px;">
         <div class="row"  style="padding-left: 15px;">
-          <router-link to="/member">
+          <router-link class="col-xs-1" to="/member">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-fanhui"></use>
             </svg>

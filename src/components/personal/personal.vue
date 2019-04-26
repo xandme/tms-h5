@@ -4,11 +4,11 @@
       <div class="container-fluid">
         <div class="navbar-header">
           <div class="row">
-            <a class="col-xs-1 set" href="/tms/setting">
+		    <router-link to="/setting" class="col-xs-1 set">
               <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-shezhi"></use>
               </svg>
-            </a>
+            </router-link>
             <strong class="col-xs-3" id="title-center">我的</strong>
             <a class="message">
               <svg class="icon" aria-hidden="true">
@@ -70,14 +70,14 @@
       </div>
       <div class="row">
         <div class="col-xs-12 list-group my-list-group">
-          <a class="list-group-item" href="/tms/member">
+          <router-link to="/member" class="list-group-item">
             <span>我的会员卡</span>
             <span class="text-right my-middle-list" style="">2&nbsp;&nbsp;></span>
-          </a>
-          <a class="list-group-item" href="/tms/coupon">
+          </router-link>
+          <router-link class="list-group-item" to="/coupon">
             <span>我的优惠券</span>
             <span class="text-right my-middle-list" style="">8&nbsp;&nbsp;></span>
-          </a>
+          </router-link>
           <a class="list-group-item">
             <span>想看的电影</span>
             <span class="text-right my-middle-list" style="">4&nbsp;&nbsp;></span>
