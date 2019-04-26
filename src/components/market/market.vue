@@ -15,7 +15,7 @@
     <div class="container-fluid" style="padding: 81px 15px 100px;">
       <div class="row">
         <div class="col-xs-3" style="padding-left: 0;position: fixed;z-index: 100">
-          <ul class="nav nav-pills nav-stacked">
+          <ul id="market_nav" class="nav nav-pills nav-stacked">
             <li role="presentation" class="color-gray" @click="getListByType(1)">套餐</li>
             <li role="presentation" class="color-gray" @click="getListByType(2)">饮品</li>
             <li role="presentation" class="color-gray" @click="getListByType(3)">小吃</li>
@@ -43,7 +43,7 @@
           <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
             <li class="row" v-for="item in list" :key="item.filmId">
               <div class="col-xs-4">
-                <img class="" alt="" style="height: 80px" :src="item.goodsPictureURL">
+                <img class="" alt="" style="height: 80px;width: 80px;" :src="item.goodsPictureURL">
               </div>
               <div class="col-xs-8">
                 <span>{{ item.goodsName }}</span><br>

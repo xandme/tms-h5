@@ -146,7 +146,6 @@
     },
     methods: {
       handleScroll(e) {
-        console.log(111)
         if ($(".navbar").offset().top > 50) {
           $(".navbar-fixed-top").addClass("top-nav");
           //$(".navbar-fixed-top").style.border-bottom('1px solid');

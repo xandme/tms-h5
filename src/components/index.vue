@@ -54,14 +54,14 @@
                   </div>
                   <div class="row">
                     <div class="col-xs-9">
-                      <div class="row">
-                        <div class="col-xs-12">评分&nbsp;{{ item.filmAvgScore * 10 }}</div>
-                        <div class="col-xs-12">导演:&nbsp;{{ item.director }}</div>
-                        <div class="col-xs-12 overflow" style="width:181px;">主演:&nbsp;{{ item.mainActor }}</div>
+                      <div class="row film-info">
+                        <div class="col-xs-12">评分：&nbsp;{{ item.filmAvgScore * 10 }}</div>
+                        <div class="col-xs-12 overflow" style="width: 175px;">导演：&nbsp;{{ item.director }}</div>
+                        <div class="col-xs-12 overflow" style="width:175px;">主演：&nbsp;{{ item.mainActor }}</div>
                       </div>
                     </div>
                     <div class="col-xs-3" style="padding: 0;">
-                      <button type="button" class="buy-ticket"><span>购票</span></button>
+                      <button type="button" class="buy-ticket" @click="toTheater"><span>购票</span></button>
                     </div>
                   </div>
                 </div>
@@ -86,9 +86,9 @@
                   <div class="row">
                     <div class="col-xs-9">
                       <div class="row">
-                        <div class="col-xs-12">评分&nbsp;{{ item.filmAvgScore * 10 }}</div>
-                        <div class="col-xs-12">导演:&nbsp;{{ item.director }}</div>
-                        <div class="col-xs-12 overflow" style="width:181px;">主演:&nbsp;{{ item.mainActor }}</div>
+                        <div class="col-xs-12">评分：&nbsp;{{ item.filmAvgScore * 10 | numFilter }}</div>
+                        <div class="col-xs-12 overflow" style="width:181px;">导演：&nbsp;{{ item.director }}</div>
+                        <div class="col-xs-12 overflow" style="width:181px;">主演：&nbsp;{{ item.mainActor }}</div>
                       </div>
                     </div>
                     <div class="col-xs-3" style="padding: 0;">
@@ -193,6 +193,25 @@
         }]
       }
     },
+    filters: {
+      numFilter(value) {
+
+        // 截取当前数据到小数点后两位
+        let realVal = parseFloat(value).toFixed(1);
+        let res;
+        var xsd = realVal.toString().split('.');
+        if (xsd.length === 1) {
+          console.log('一位');
+          res = realVal.toString() + '.0';
+        } else {
+          console.log('两位');
+          res = realVal;
+        }
+        return res
+
+      }
+
+    },
     methods: {
       cutTab() {
         const index = 2
@@ -207,6 +226,9 @@
           $('.film-coming-tab').removeClass('active-border')
           $('.film-hot-tab').addClass('active-border')
         }
+      },
+      toTheater() {
+        this.$router.push('/theaterList')
       },
       clickTheater() {
         var btnFilm = $("#btnFilm");

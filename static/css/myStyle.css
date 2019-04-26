@@ -125,7 +125,14 @@ a.message {
     background-color: #8d37e9;
 }
 .buy-ticket {
-    margin-top: 20px;
+    margin-top: 40px;
+    border: 1px solid #11a3f2;
+    background-color: #11a3f2;
+    border-radius: 10px;
+    color: white;
+    font-size: 12px;
+    padding: 3px 7px;
+    width: 44px;
 }
 #home-film-list {
     border-top: 1px solid black;
@@ -180,7 +187,7 @@ a.message {
     position: fixed;
     background-color: #adadad;
 }
-#market_nav > li > a {
+#market_nav > li {
     padding: 10px 5px;
     text-align: center;
 }
@@ -203,4 +210,11 @@ a.message {
 }
 .my-middle > div {
     padding: 0;
+}
+.film-info > .col-xs-12 {
+    font-size: 12px;
+    padding: 2px 15px;
+}
+.film-info {
+    padding-top: 10px;
 }
