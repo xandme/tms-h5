@@ -35,7 +35,6 @@
 }
 /*div {font-family: "Kristen ITC";}*/
 html, body {width:100%;height:100%;} /*非常重要的样式让背景图片100%适应整个屏幕*/
-.bg {display: table;width: 100%;height: 100%;padding: 100px 0;text-align: center;color: #eeeeee;background: url(/img/img2.jpg) no-repeat bottom center;background-color: #eeeeee;background-size: cover;}
 .my-navbar {padding:10px 0;transition: background 0.5s ease-in-out, padding 0.5s ease-in-out;}
 .my-navbar a{background:transparent !important;color:#fff !important}
 .my-navbar a:hover {color:#45bcf9 !important;background:transparent;outline:0}
@@ -97,13 +96,13 @@ a.message {
     background-color: white;
 }
 #home-btn-group {
-    padding-left: 20px;
-    padding-right: 20px;
+    padding: 0 4%;
+    text-align: center;
 }
 #home-btn-group > button {
     height: 25px;
     width: 74px;
-    padding-top: 3px;
+    padding: 4px 0;
 }
 #home-head > .row > .col-xs-3 {
     padding-top: 4px;
@@ -117,12 +116,12 @@ a.message {
 .active-border:after {
     content: '';
     position: absolute;
-    left: 50px;
+    left: 26%;
     top: auto;
     bottom: 0;
     right: auto;
     height: 4px;
-    width: 87px;
+    width: 48%;
     background-color: #8d37e9;
 }
 .buy-ticket {
@@ -151,4 +150,57 @@ a.message {
     color: white;
     border-radius: 2px;
     opacity: 0.65;
+}
+.member-1,.member-2,.member-3 {
+    border-radius: 10px;
+    height: 180px;
+    color: white;
+}
+.member-1{
+    background: linear-gradient(-60deg, rgb(254, 96, 35) 0%, #fef09f 100%);
+}
+.member-2{
+    background: linear-gradient(-60deg, #252525 0%, #bababa 100%);
+}
+.member-3{
+    background: linear-gradient(-50deg, #3d5199 0%, rgba(51, 216, 235, 0.8) 100%);
+}
+.member-name-2 {
+    padding-top: 45px;
+    padding-left:25px;
+    padding-bottom: 70px;
+    font-size: 25px;
+}
+#member_info {
+    padding: 15px;
+}
+#member_detail_head {
+    padding: 60px 45px;
+    border: none;
+    position: fixed;
+    background-color: #adadad;
+}
+#market_nav > li > a {
+    padding: 10px 5px;
+    text-align: center;
+}
+#bottom-bar > li {
+    padding: 0;
+    min-width: 60px;
+}
+#shopping_trolley {
+    margin-top: 5px;
+    background-color: white;
+    padding-left: 4px;
+    padding-top: 3px;
+    width: 27px;
+}
+.overflow {
+    /*文本超出用省略号代替*/
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+.my-middle > div {
+    padding: 0;
 }
