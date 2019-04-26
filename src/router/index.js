@@ -11,6 +11,11 @@ export default new Router({
       component: () => import('@/components/index')
     },
     {
+      path: '/login',
+      name: 'login',
+      component: () => import('@/components/login')
+    },
+    {
       path: '/search',
       name: 'search',
       component: () => import('@/components/common/search')

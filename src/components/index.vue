@@ -23,9 +23,8 @@
           </div>
         </div>
         <div id="filmHead" class="row text-center" style="color: #0f0f0f;padding-bottom: 0;">
-          <div class="col-xs-6 active-border" style="padding-bottom: 10px;color: #8d37e9;">正在热映</div>
-          <div class="col-xs-6">即将上映</div>
-          <div></div>
+          <div class="film-hot-tab col-xs-6 active-border" @click="cutTab">正在热映</div>
+          <div class="film-coming-tab col-xs-6" @click="cutTab">即将上映</div>
         </div>
         <div id="theaterHead" class="row text-center" style="color: #0f0f0f;display: none;">
           <div class="col-xs-6" style="padding-bottom: 10px;">全城
@@ -39,194 +38,89 @@
       </div>
     </nav>
     <div id="filmBody" class="container-fluid" style="padding-top: 27px;padding-bottom: 50px;">
-      <!--<div class="row">-->
-      <!--<div class="col-xs-12">图片轮播</div>-->
-      <!--</div>-->
       <div class="row">
         <div id="home-film-list" class="col-xs-12 list-group my-list-group">
-          <a class="list-group-item row">
-            <div class="col-xs-3" style="padding: 0;">
-              <img src="/img/img3.jpg" style="height: 100px;width: 70px;">
-            </div>
-            <div class="col-xs-9">
-              <div class="row">
-                <div class="col-xs-12">
-                  <strong class="">反贪风暴4</strong>
-                  <!--<span class="">电影名称</span>-->
+          <van-list v-model="list[0].loading" :finished="list[0].finished" finished-text="没有更多了" @load="onLoad(0)">
+            <div v-for="item in list[0].items" :key="item.filmId">
+              <a class="list-group-item row">
+                <div class="col-xs-3" style="padding: 0;">
+                  <img :src="item.url" style="height: 100px;width: 70px;">
                 </div>
-              </div>
-              <div class="row">
                 <div class="col-xs-9">
                   <div class="row">
-                    <div class="col-xs-12">评分&nbsp;8.8</div>
-                    <div class="col-xs-12">导演:&nbsp;林德禄</div>
-                    <div class="col-xs-12 overflow" style="width:181px;">主演:&nbsp;古天乐&nbsp;郑嘉颖&nbsp;林峯</div>
+                    <div class="col-xs-12">
+                      <strong class="">{{ item.filmName }}</strong>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-xs-9">
+                      <div class="row">
+                        <div class="col-xs-12">评分&nbsp;{{ item.filmAvgScore * 10 }}</div>
+                        <div class="col-xs-12">导演:&nbsp;{{ item.director }}</div>
+                        <div class="col-xs-12 overflow" style="width:181px;">主演:&nbsp;{{ item.mainActor }}</div>
+                      </div>
+                    </div>
+                    <div class="col-xs-3" style="padding: 0;">
+                      <button type="button" class="buy-ticket"><span>购票</span></button>
+                    </div>
                   </div>
                 </div>
+              </a>
+            </div>
+          </van-list>
+        </div>
+
+        <div id="coming-film-list" class="col-xs-12 list-group my-list-group" style="display: none">
+          <van-list v-model="list[1].loading" :finished="list[1].finished" finished-text="没有更多了" @load="onLoad(1)">
+            <div v-for="item in list[1].items" :key="item.filmId">
+              <a class="list-group-item row">
                 <div class="col-xs-3" style="padding: 0;">
-                  <button type="button" class="buy-ticket"><span>购票</span></button>
+                  <img :src="item.url" style="height: 100px;width: 70px;">
                 </div>
-              </div>
-            </div>
-          </a>
-          <a class="list-group-item row">
-            <div class="col-xs-3" style="padding: 0;">
-              <img src="/img/img2.jpg" style="height: 100px;width: 70px;">
-            </div>
-            <div class="col-xs-9">
-              <div class="row">
-                <div class="col-xs-12">
-                  <strong class="">电影名称</strong>
-                  <!--<span class="">电影名称</span>-->
-                </div>
-              </div>
-              <div class="row">
                 <div class="col-xs-9">
                   <div class="row">
-                    <div class="col-xs-12">评分&nbsp;8.8</div>
-                    <div class="col-xs-12">导演:&nbsp;去去去</div>
-                    <div class="col-xs-12">主演:&nbsp;去去去&nbsp;哇哇哇</div>
+                    <div class="col-xs-12">
+                      <strong class="">{{ item.filmName }}</strong>
+                    </div>
                   </div>
-                </div>
-                <div class="col-xs-3" style="padding: 0;">
-                  <button type="button" class="buy-ticket"><span>购票</span></button>
-                </div>
-              </div>
-            </div>
-          </a>
-          <a class="list-group-item row">
-            <div class="col-xs-3" style="padding: 0;">
-              <img src="/img/img2.jpg" style="height: 100px;width: 70px;">
-            </div>
-            <div class="col-xs-9">
-              <div class="row">
-                <div class="col-xs-12">
-                  <strong class="">电影名称</strong>
-                  <!--<span class="">电影名称</span>-->
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-xs-9">
                   <div class="row">
-                    <div class="col-xs-12">评分&nbsp;8.8</div>
-                    <div class="col-xs-12">导演:&nbsp;去去去</div>
-                    <div class="col-xs-12">主演:&nbsp;去去去&nbsp;哇哇哇</div>
+                    <div class="col-xs-9">
+                      <div class="row">
+                        <div class="col-xs-12">评分&nbsp;{{ item.filmAvgScore * 10 }}</div>
+                        <div class="col-xs-12">导演:&nbsp;{{ item.director }}</div>
+                        <div class="col-xs-12 overflow" style="width:181px;">主演:&nbsp;{{ item.mainActor }}</div>
+                      </div>
+                    </div>
+                    <div class="col-xs-3" style="padding: 0;">
+                      <button type="button" class="buy-ticket"><span>购票</span></button>
+                    </div>
                   </div>
                 </div>
-                <div class="col-xs-3" style="padding: 0;">
-                  <button type="button" class="buy-ticket"><span>购票</span></button>
-                </div>
-              </div>
+              </a>
             </div>
-          </a>
-          <a class="list-group-item row">
-            <div class="col-xs-3" style="padding: 0;">
-              <img src="/img/img2.jpg" style="height: 100px;width: 70px;">
-            </div>
-            <div class="col-xs-9">
-              <div class="row">
-                <div class="col-xs-12">
-                  <strong class="">电影名称</strong>
-                  <!--<span class="">电影名称</span>-->
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-xs-9">
-                  <div class="row">
-                    <div class="col-xs-12">评分&nbsp;8.8</div>
-                    <div class="col-xs-12">导演:&nbsp;去去去</div>
-                    <div class="col-xs-12">主演:&nbsp;去去去&nbsp;哇哇哇</div>
-                  </div>
-                </div>
-                <div class="col-xs-3" style="padding: 0;">
-                  <button type="button" class="buy-ticket"><span>购票</span></button>
-                </div>
-              </div>
-            </div>
-          </a>
-          <a class="list-group-item row">
-            <div class="col-xs-3" style="padding: 0;">
-              <img src="/img/img2.jpg" style="height: 100px;width: 70px;">
-            </div>
-            <div class="col-xs-9">
-              <div class="row">
-                <div class="col-xs-12">
-                  <strong class="">电影名称</strong>
-                  <!--<span class="">电影名称</span>-->
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-xs-9">
-                  <div class="row">
-                    <div class="col-xs-12">评分&nbsp;8.8</div>
-                    <div class="col-xs-12">导演:&nbsp;去去去</div>
-                    <div class="col-xs-12">主演:&nbsp;去去去&nbsp;哇哇哇</div>
-                  </div>
-                </div>
-                <div class="col-xs-3" style="padding: 0;">
-                  <button type="button" class="buy-ticket"><span>购票</span></button>
-                </div>
-              </div>
-            </div>
-          </a>
-          <a class="list-group-item row">
-            <div class="col-xs-3" style="padding: 0;">
-              <img src="/img/img2.jpg" style="height: 100px;width: 70px;">
-            </div>
-            <div class="col-xs-9">
-              <div class="row">
-                <div class="col-xs-12">
-                  <strong class="">电影名称</strong>
-                  <!--<span class="">电影名称</span>-->
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-xs-9">
-                  <div class="row">
-                    <div class="col-xs-12">评分&nbsp;8.8</div>
-                    <div class="col-xs-12">导演:&nbsp;去去去</div>
-                    <div class="col-xs-12">主演:&nbsp;去去去&nbsp;哇哇哇</div>
-                  </div>
-                </div>
-                <div class="col-xs-3" style="padding: 0;">
-                  <button type="button" class="buy-ticket"><span>购票</span></button>
-                </div>
-              </div>
-            </div>
-          </a>
+          </van-list>
         </div>
       </div>
-      <!--<div class="row">-->
-      <!--<div class="col-xs-12 text-center">-->
-      <!--<div class="col-xs-4">热映影片</div>-->
-      <!--<div class="col-xs-4 my-middle-list">全部32部&nbsp;&nbsp;></div>-->
-      <!--</div>-->
-      <!--</div>-->
-      <!--<div class="row">-->
-      <!--<div class="col-xs-12">-->
-      <!--<a style="height: 100px;width:50px;color:#555;">-->
-      <!--<img alt="" src="">-->
-      <!--<span>电影名称</span>-->
-      <!--<button>购买</button>-->
-      <!--</a>-->
-      <!--</div>-->
-      <!--</div>-->
     </div>
-    <div id="theaterBody" class="container-fluid" style="padding-top: 88px;padding-bottom: 50px;display: none;">
+    <div id="theaterBody" class="container-fluid" style="padding-top: 27px;padding-bottom: 50px;display: none;">
       <div class="row">
         <div id="home-theater-list" class="col-xs-12 list-group my-list-group">
-          <a class="list-group-item row">
-            <div class="col-xs-12">竖店影院重庆南坪万达店</div>
-            <div class="col-xs-12" style="font-size: 11px;">重庆市南岸区南坪万达广场5楼</div>
-            <div class="col-xs-12">023-61526548</div>
-            <div class="col-xs-12">收藏标记</div>
-          </a>
-          <a class="list-group-item row">
-            <div class="col-xs-12">影院名称</div>
-            <div class="col-xs-12">影院地址</div>
-            <div class="col-xs-12">联系电话</div>
-            <div class="col-xs-12">收藏标记</div>
-          </a>
+          <van-list v-model="list[2].loading" :finished="list[2].finished" finished-text="没有更多了" @load="onLoad(2)">
+            <div v-for="item in list[2].items" :key="item.theaterId">
+              <a class="list-group-item row">
+                <div class="col-xs-12">{{ item.theaterName }}</div>
+                <div class="col-xs-12" style="font-size: 11px;">{{ item.theaterAddress }}</div>
+                <div class="col-xs-12">{{ item.phoneNumber }}</div>
+                <div class="col-xs-12">收藏标记</div>
+              </a>
+            </div>
+          </van-list>
+          <!--<a class="list-group-item row">-->
+          <!--<div class="col-xs-12">影院名称</div>-->
+          <!--<div class="col-xs-12">影院地址</div>-->
+          <!--<div class="col-xs-12">联系电话</div>-->
+          <!--<div class="col-xs-12">收藏标记</div>-->
+          <!--</a>-->
         </div>
       </div>
     </div>
@@ -264,10 +158,65 @@
 </template>
 
 <script>
+  import {fetchList} from "@/api/film_info"
+  import {fetchList as fetchTheaterList} from "@/api/theater_info"
+
   export default {
     name: "index",
+    data() {
+      return {
+        list: [{
+          items: [],
+          loading: false,
+          finished: false,
+          listQuery: {
+            page_no: 0,
+            page_size: 10,
+            page_total: undefined,
+            total: undefined
+          }
+        }, {
+          items: [],
+          loading: false,
+          finished: false,
+          listQuery: {
+            page_no: 0,
+            page_size: 10,
+            page_total: undefined,
+            total: undefined,
+            status: 0
+          }
+        }, {
+          items: [],
+          loading: false,
+          finished: false,
+          listQuery: {
+            page_no: 0,
+            page_size: 10,
+            page_total: undefined,
+            total: undefined
+          }
+        }]
+      }
+    },
     methods: {
+      cutTab() {
+        console.log("111111111111112")
+        const index = 2
+        if (index == 2) {
+          $('#coming-film-list').show()
+          $('#home-film-list').hide()
+          $('.film-hot-tab').removeClass('active-border')
+          $('.film-coming-tab').addClass('active-border')
+        } else if (index == 1) {
+          $('#coming-film-list').hide()
+          $('#home-film-list').show()
+          $('.film-coming-tab').removeClass('active-border')
+          $('.film-hot-tab').addClass('active-border')
+        }
+      },
       clickTheater() {
+        console.log("2222222")
         var btnFilm = $("#btnFilm");
         var btnTheater = $("#btnTheater");
         if (btnFilm.hasClass("active")) {
@@ -280,6 +229,7 @@
         }
       },
       clickFilm() {
+        console.log("1111111111")
         var btnFilm = $("#btnFilm");
         var btnTheater = $("#btnTheater");
         if (btnTheater.hasClass("active")) {
@@ -290,6 +240,52 @@
           $("#filmHead").show();
           $("#filmBody").show();
         }
+      },
+      cutTab() {
+
+      },
+      getList(index) {
+        const list = this.list[index]
+        list.listQuery.page_no = list.listQuery.page_no + 1
+        if (index !== 2) {
+          fetchList(list.listQuery).then(response => {
+              console.log(response)
+              list.items = list.items.concat(response.extra.data)
+              list.listQuery.page_total = response.extra.page_total
+              list.listQuery.total = response.extra.total
+              list.listQuery.page_no++
+              // 加载状态结束
+              list.loading = false
+              // 数据全部加载完成
+              if (list.listQuery.page_no >= list.listQuery.page_total) {
+                list.finished = true
+              }
+            }
+          )
+        } else {
+          fetchTheaterList(list.listQuery).then(response => {
+              console.log(response)
+              list.items = list.items.concat(response.extra.data)
+              list.listQuery.page_total = response.extra.page_total
+              list.listQuery.total = response.extra.total
+              list.listQuery.page_no++
+              // 加载状态结束
+              list.loading = false
+              // 数据全部加载完成
+              if (list.listQuery.page_no >= list.listQuery.page_total) {
+                list.finished = true
+              }
+            }
+          )
+        }
+      },
+      onLoad(index) {
+        setTimeout(() => {
+          this.getList(index)
+        }, 1000)
+      },
+      cutTab(index) {
+
       }
     }
   }

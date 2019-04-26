@@ -111,6 +111,9 @@ a.message {
 #home-head > .row > .col-xs-3 > a {
     color: black;
   }
+.active-border{
+  padding-bottom: 10px;color: #8d37e9;
+}
 .active-border:after {
     content: '';
     position: absolute;

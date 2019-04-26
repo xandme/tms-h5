@@ -14,19 +14,19 @@
     </nav>
     <div class="container-fluid" style="padding: 81px 15px 100px;">
       <div class="row">
-        <div class="col-xs-3" style="padding-left: 0;position: fixed;">
+        <div class="col-xs-3" style="padding-left: 0;position: fixed;z-index: 100">
           <ul class="nav nav-pills nav-stacked">
-            <li role="presentation" class="color-gray"><a href="#package">套餐</a></li>
-            <li role="presentation" class="color-gray"><a href="#drink">饮品</a></li>
-            <li role="presentation" class="color-gray"><a href="#snake">小吃</a></li>
-            <li role="presentation" class="color-gray"><a href="#glasses">3D眼镜</a></li>
+            <li role="presentation" class="color-gray" @click="getListByType(1)">套餐</li>
+            <li role="presentation" class="color-gray" @click="getListByType(2)">饮品</li>
+            <li role="presentation" class="color-gray" @click="getListByType(3)">小吃</li>
+            <li role="presentation" class="color-gray" @click="getListByType(4)">3D眼镜</li>
           </ul>
         </div>
         <ul style="padding-left: 94px;" class="col-xs-12 nav" id="goods-list">
           <li id="package">
-            <span style="font-size: 12px;">套餐</span>
+            <span style="font-size: 12px;" v-text="typeName"></span>
           </li>
-          <li class="row">
+          <!--<li class="row">
             <div class="col-xs-4">
               <img class="" alt="" style="height: 80px" src="/img/img2.jpg">
             </div>
@@ -39,88 +39,23 @@
                 </svg>
               </div>
             </div>
-          </li>
-          <li class="row">
-            <div class="col-xs-4">
-              <img class="" alt="" style="height: 80px" src="/img/img2.jpg">
-            </div>
-            <div class="col-xs-8">
-              123
-            </div>
-          </li>
-          <li class="row">
-            <div class="col-xs-4">
-              <img class="" alt="" style="height: 80px" src="/img/img2.jpg">
-            </div>
-            <div class="col-xs-8">
-              123
-            </div>
-          </li>
-          <li class="row">
-            <div class="col-xs-4">
-              <img class="" alt="" style="height: 80px" src="/img/img2.jpg">
-            </div>
-            <div class="col-xs-8">
-              123
-            </div>
-          </li>
-          <li id="drink">
-            <span style="font-size: 12px;">饮品</span>
-          </li>
-          <li class="row">
-            <div class="col-xs-4">
-              <img class="" alt="" style="height: 80px" src="/img/img2.jpg">
-            </div>
-            <div class="col-xs-8">
-              123
-            </div>
-          </li>
-          <li class="row">
-            <div class="col-xs-4">
-              <img class="" alt="" style="height: 80px" src="/img/img2.jpg">
-            </div>
-            <div class="col-xs-8">
-              123
-            </div>
-          </li>
-          <li id="snake">
-            <span style="font-size: 12px;">小吃</span>
-          </li>
-          <li class="row">
-            <div class="col-xs-4">
-              <img class="" alt="" style="height: 80px" src="/img/img2.jpg">
-            </div>
-            <div class="col-xs-8">
-              123
-            </div>
-          </li>
-          <li class="row">
-            <div class="col-xs-4">
-              <img class="" alt="" style="height: 80px" src="/img/img2.jpg">
-            </div>
-            <div class="col-xs-8">
-              123
-            </div>
-          </li>
-          <li class="row">
-            <div class="col-xs-4">
-              <img class="" alt="" style="height: 80px" src="/img/img2.jpg">
-            </div>
-            <div class="col-xs-8">
-              123
-            </div>
-          </li>
-          <li id="glasses">
-            <span style="font-size: 12px;">3D眼镜</span>
-          </li>
-          <li class="row">
-            <div class="col-xs-4">
-              <img class="" alt="" style="height: 80px" src="/img/img2.jpg">
-            </div>
-            <div class="col-xs-8">
-              123
-            </div>
-          </li>
+          </li>-->
+          <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
+            <li class="row" v-for="item in list" :key="item.filmId">
+              <div class="col-xs-4">
+                <img class="" alt="" style="height: 80px" :src="item.goodsPictureURL">
+              </div>
+              <div class="col-xs-8">
+                <span>{{ item.goodsName }}</span><br>
+                <span style="font-size: 12px;">{{ item.goodsDescription }}</span><br>
+                <div style="color:red;padding-top: 13px;padding-left: 5px;width: 150px;">￥{{ item.goodsPrice }}
+                  <svg class="icon" aria-hidden="true" style="float: right;">
+                    <use xlink:href="#icon-jiahao"></use>
+                  </svg>
+                </div>
+              </div>
+            </li>
+          </van-list>
         </ul>
       </div>
     </div>
@@ -181,8 +116,69 @@
 </template>
 
 <script>
+  import {fetchList} from "@/api/goods_info"
+
   export default {
-    name: "market"
+    name: "market",
+    data() {
+      return {
+        list: [],
+        loadingShow: true,
+        typeName: '套餐',
+
+        loading: false,
+        finished: false,
+        listQuery: {
+          page_no: 0,
+          page_size: 10,
+          page_total: undefined,
+          total: undefined,
+          type: ""
+        }
+      }
+    },
+    methods: {
+      getList() {
+        const _this = this
+        this.listQuery.page_no = this.listQuery.page_no + 1
+        fetchList(this.listQuery).then(response => {
+            console.log(response)
+            _this.list = _this.list.concat(response.extra.data)
+            _this.listQuery.page_total = response.extra.page_total
+            _this.listQuery.total = response.extra.total
+            _this.listQuery.page_no++
+            // 加载状态结束
+            _this.loading = false
+            // 数据全部加载完成
+            if (_this.listQuery.page_no >= _this.listQuery.page_total) {
+              _this.finished = true
+            }
+          }
+        )
+        _this.loadingShow = false
+      },
+      onLoad() {
+        setTimeout(() => {
+          this.getList()
+        }, 1000)
+      },
+      getListByType(type) {
+        console.log(">>>>>>>>>")
+        if (type === 1) {
+          this.typeName = "套餐"
+        } else if (type === 2) {
+          this.typeName = "饮品"
+        } else if (type === 3) {
+          this.typeName = "小吃"
+        } else if (type === 4) {
+          this.typeName = "3D眼睛"
+        }
+        this.listQuery.type = type
+        this.listQuery.page_no = 0
+        this.list = []
+        this.getList()
+      }
+    }
   }
 </script>
 

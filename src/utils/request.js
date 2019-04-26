@@ -1,6 +1,7 @@
 import axios from 'axios'
+import {Toast} from 'vant'
 
-const baseurl = "https://localhost:8099"
+const baseurl = "http://localhost:8099"
 
 // 创建axios实例
 const service = axios.create({
@@ -13,15 +14,17 @@ service.interceptors.response.use(
     console.log(response)
     // error_code 不为1000抛错
     const res = response.data
-    if(res.error_code !== 1000) {
+    if (res.error_code !== 1000) {
       console.log('请求失败')
-      this.$toast.fail("请求失败")
+      Toast.fail("请求失败")
+    } else {
+      return response.data
     }
   },
   error => {
     console.log(error)
     console.log("系统繁忙")
-    this.$toast.fail("系统繁忙")
+    Toast.fail("系统繁忙")
   }
 )
 

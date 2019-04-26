@@ -23,11 +23,14 @@
       <div class="row my-head" style="height: 260px;">
         <div class="col-xs-12" style="margin-top: 80px;margin-bottom: 20px;">
           <div class="col-xs-4">
-            <img class="img-circle" alt="" style="height: 80px" src="/img/img2.jpg">
+            <img class="img-circle" alt="" style="height: 80px"
+                 src="@/assets/img/img2.jpg">
           </div>
           <div class="col-xs-8" style="margin-top: 10px;padding: 0">
             <div class="col-xs-12">昵称user.nickname</div>
-            <div class="col-xs-12"><a href="/tms/login">登录</a></div>
+            <div class="col-xs-12">
+              <router-link to="/login">登录</router-link>
+            </div>
           </div>
         </div>
       </div>
@@ -105,21 +108,30 @@
     <nav class="navbar navbar-default navbar-fixed-bottom">
       <div class="container">
         <ul id="bottom-bar" class="nav navbar-inner navbar-nav text-center" style="margin: 0 -15px;">
-          <li class="col-xs-4"><router-link to="/">
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-home"></use>
-            </svg>
-            <br>首页</router-link></li>
-          <li class="col-xs-4"><router-link to="/market">
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-shangcheng"></use>
-            </svg>
-            <br>商城</router-link></li>
-          <li class="col-xs-4"><router-link to="/personal">
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-personal2"></use>
-            </svg>
-            <br>我的</router-link></li>
+          <li class="col-xs-4">
+            <router-link to="/">
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-home"></use>
+              </svg>
+              <br>首页
+            </router-link>
+          </li>
+          <li class="col-xs-4">
+            <router-link to="/market">
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-shangcheng"></use>
+              </svg>
+              <br>商城
+            </router-link>
+          </li>
+          <li class="col-xs-4">
+            <router-link to="/personal">
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-personal2"></use>
+              </svg>
+              <br>我的
+            </router-link>
+          </li>
         </ul>
       </div>
     </nav>
