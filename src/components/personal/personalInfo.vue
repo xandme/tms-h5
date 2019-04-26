@@ -17,7 +17,7 @@
       <div class="col-xs-12 list-group my-list-group" style="padding: 0;">
         <a class="list-group-item">
           <span>头像</span>
-          <span class="text-right my-middle-list" style="margin-top:-10px"><img class="img-circle" alt="" style="height: 40px" src="/img/img2.jpg">&nbsp;&nbsp;></span>
+          <span class="text-right my-middle-list" style="margin-top:-10px"><img class="img-circle" alt="" style="height: 40px" src="../../../static/img/img2.jpg">&nbsp;&nbsp;></span>
         </a>
         <a class="list-group-item">
           <span>昵称</span>

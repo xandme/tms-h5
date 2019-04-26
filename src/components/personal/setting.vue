@@ -20,7 +20,7 @@
           <router-link to="/person/info">
           <div class="row list-group-item" style="margin-right: 0;">
             <div class="col-xs-4">
-              <img class="img-circle" alt="" style="height: 80px" src="/img/img2.jpg">
+              <img class="img-circle" alt="" style="height: 80px" src="../../../static/img/img2.jpg">
             </div>
             <div class="col-xs-8" style="margin-top: 30px;padding: 0">
               <div class="col-xs-10">昵称user.nickname</div>
