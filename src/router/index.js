@@ -26,6 +26,11 @@ export default new Router({
       component: () => import('@/components/common/theater')
     },
     {
+      path: '/theaterList',
+      name: 'theaterList',
+      component: () => import('@/components/common/theaterList')
+    },
+    {
       path: '/market',
       name: 'market',
       component: () => import('@/components/market/market')
