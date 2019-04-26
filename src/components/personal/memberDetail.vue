@@ -14,14 +14,13 @@
     </div>
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container" style="margin-top:15px;">
-        <div class="row"  style="padding-left: 15px;">
+        <div class="row text-center">
           <router-link class="col-xs-1" to="/member">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-fanhui"></use>
             </svg>
           </router-link>
-          <strong class="col-xs-4" id="title"
-                  style="text-align: center;font-size: 16px;margin-left: 95px;">会员卡详情</strong>
+          <strong id="title" style="font-size: 16px;">会员卡详情</strong>
         </div>
       </div>
     </nav>

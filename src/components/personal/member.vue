@@ -2,20 +2,17 @@
   <div>
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container" style="margin-top:15px;">
-        <div class="row" style="padding-left: 15px;">
-          <router-link class="col-xs-1" to="/personal">
+        <div class="row text-center" style="padding-left: 15px;">
+          <router-link class="col-xs-1" style="padding-left: 0;" to="/personal">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-fanhui"></use>
             </svg>
           </router-link>
-          <strong class="col-xs-6" id="title"
-                  style="text-align: center;font-size: 16px;margin-left: 20%;">我的会员卡</strong>
-          <router-link class="col-xs-1" to="/setting">
-            <div class="col-xs-1 col-xs-offset-2" style="padding-left: 15px;">
-              <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-jiahao1"></use>
-              </svg>
-            </div>
+          <strong id="title" style="font-size: 16px;">我的会员卡</strong>
+          <router-link class="col-xs-1" style="margin-right: 20px;float: right;" to="/setting">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-jiahao1"></use>
+            </svg>
           </router-link>
         </div>
       </div>

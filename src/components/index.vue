@@ -46,7 +46,7 @@
                 <div class="col-xs-3" style="padding: 0;">
                   <img :src="item.url" style="height: 100px;width: 70px;">
                 </div>
-                <div class="col-xs-9">
+                <div class="col-xs-9" style="padding: 5px 15px 0 10px;">
                   <div class="row">
                     <div class="col-xs-12">
                       <strong class="">{{ item.filmName }}</strong>

@@ -2,18 +2,17 @@
   <div>
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container" style="margin-top:15px;">
-        <div class="row">
-          <router-link to="/personal">
+        <div class="row text-center">
+          <router-link class="col-xs-1" to="/personal">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-fanhui"></use>
             </svg>
           </router-link>
-          <strong class="col-xs-4" id="title"
-                  style="text-align: center;font-size: 16px;margin-left: 95px;">我的优惠券</strong>
+          <strong id="title" style="font-size: 16px;">我的优惠券</strong>
         </div>
       </div>
     </nav>
-    <div class="container-fluid" style="padding: 60px 15px 0;min-height: 607px;">
+    <div class="container-fluid" style="padding: 60px 15px 0;min-height: 607px;background-color: #e6e6e6;">
       <div class="row" style="min-height: inherit;">
         <div class="col-xs-12 list-group" style="padding: 0 0 30px;margin: 0;min-height: inherit;">
           <a class="list-group-item" href="" style="padding: 15px 40px;margin: 5px;border-radius: 5px;height: 130px;">

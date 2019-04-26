@@ -3,13 +3,13 @@
     <nav class="navbar navbar-fixed-top my-navbar" role="navigation" style="">
       <div class="container-fluid">
         <div class="navbar-header">
-          <div class="row">
+          <div class="row text-center">
 		    <router-link to="/setting" class="col-xs-1 set">
               <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-shezhi"></use>
               </svg>
             </router-link>
-            <strong class="col-xs-3" id="title-center">我的</strong>
+            <strong id="title-center">我的</strong>
             <a class="message">
               <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-xiaoxi2"></use>

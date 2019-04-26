@@ -6,9 +6,8 @@
     </div>
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container" style="margin-top:15px;">
-        <div class="row">
-          <strong class="col-xs-3" id="title"
-                  style="text-align: center;font-size: 20px;margin-left: 140px;">商城</strong>
+        <div class="row text-center">
+          <strong id="title" style="font-size: 20px;">商城</strong>
         </div>
       </div>
     </nav>
