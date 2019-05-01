@@ -6,14 +6,7 @@
           <div class="col-xs-3">
             <a href="#">重庆▼</a>
           </div>
-          <!--<div id="home-btn-group" class="btn-group" role="group" aria-label="head">-->
-            <!--<button type="button" id="btnFilm" class="btn btn-default active" @click="clickFilm">-->
-              <!--电影-->
-            <!--</button>-->
-            <!--<button type="button" id="btnTheater" class="btn btn-default" @click="clickTheater">-->
-              <!--影院-->
-            <!--</button>-->
-          <!--</div>-->
+          <strong style="font-size: 16px;margin-left: -25px;">竖店影视</strong>
           <router-link style="float: right;margin-right: 20px;" to="/search">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-chazhao"></use>
@@ -40,7 +33,7 @@
         <div id="home-film-list" class="col-xs-12 list-group my-list-group">
           <van-list v-model="list[0].loading" :finished="list[0].finished" finished-text="没有更多了" @load="onLoad(0)">
             <div v-for="item in list[0].items" :key="item.filmId">
-              <a class="list-group-item row">
+              <router-link to="/" class="list-group-item row">
                 <div class="col-xs-3" style="padding: 0;">
                   <img :src="item.url" style="height: 100px;width: 70px;">
                 </div>
@@ -58,12 +51,12 @@
                         <div class="col-xs-12 overflow" style="width:175px;">主演：&nbsp;{{ item.mainActor }}</div>
                       </div>
                     </div>
-                    <div class="col-xs-3" style="padding: 0;">
-                      <button type="button" class="buy-ticket" @click="toTheater"><span>购票</span></button>
+                    <div class="col-xs-3" style="padding: 0;margin-top: 40px;">
+                      <router-link to="/arrangementList"><button type="button" class="buy-ticket">购票</button></router-link>
                     </div>
                   </div>
                 </div>
-              </a>
+              </router-link>
             </div>
           </van-list>
         </div>
@@ -225,33 +218,8 @@
           $('.film-hot-tab').addClass('active-border')
         }
       },
-      toTheater() {
-        this.$router.push('/theaterList')
-      },
-      clickTheater() {
-        var btnFilm = $("#btnFilm");
-        var btnTheater = $("#btnTheater");
-        if (btnFilm.hasClass("active")) {
-          btnFilm.removeClass("active");
-          btnTheater.addClass("active");
-          $("#filmHead").hide();
-          $("#filmBody").hide();
-          $("#theaterHead").show();
-          $("#theaterBody").show();
-        }
-      },
-      clickFilm() {
-        console.log("1111111111")
-        var btnFilm = $("#btnFilm");
-        var btnTheater = $("#btnTheater");
-        if (btnTheater.hasClass("active")) {
-          btnTheater.removeClass("active");
-          btnFilm.addClass("active");
-          $("#theaterHead").hide();
-          $("#theaterBody").hide();
-          $("#filmHead").show();
-          $("#filmBody").show();
-        }
+      toArrange() {
+        this.$router.push('/arrangementList')
       },
       cutTab() {
 

@@ -8,7 +8,7 @@
 							<use xlink:href="#icon-fanhui"></use>
 						</svg>
 					</router-link>
-					<strong id="title" style="font-size: 16px;">电影名称</strong>
+					<strong id="title" style="font-size: 16px;">复仇者联盟4：终局之战</strong>
 					<div class="" style="float: right;margin-right: 20px;">
 						<router-link to="/search">
 							<svg class="icon" aria-hidden="true">
@@ -34,24 +34,7 @@
 						<span>影院名称</span><br>
 						<span>影院地址theaterAddress</span>
 					</li>
-					<li class="list-group-item">
-						<span>影院名称</span><br>
-						<span>影院地址theaterAddress</span>
-					</li>
-					<li class="list-group-item">
-						<span>影院名称</span><br>
-						<span>影院地址theaterAddress</span>
-					</li>
-					<li class="list-group-item">
-						<span>影院名称</span><br>
-						<span>影院地址theaterAddress</span>
-					</li>
-					<li class="list-group-item">
-						<span>影院名称</span><br>
-						<span>影院地址theaterAddress</span>
-					</li>
 				</ul>
-				<!--</div>-->
 			</div>
 		</div>
 	</div>

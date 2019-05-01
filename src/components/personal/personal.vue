@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav class="navbar navbar-fixed-top my-navbar" role="navigation" style="">
+    <nav id="personal-head" class="navbar navbar-fixed-top my-navbar" role="navigation" style="">
       <div class="container-fluid">
         <div class="navbar-header">
           <div class="row text-center">
@@ -10,11 +10,11 @@
               </svg>
             </router-link>
             <strong id="title-center">我的</strong>
-            <a class="message">
+            <router-link to="/" class="message">
               <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-xiaoxi2"></use>
               </svg>
-            </a>
+            </router-link>
           </div>
         </div>
       </div>
@@ -36,36 +36,36 @@
       </div>
       <div class="row text-center my-middle">
         <div class="col-xs-3">
-          <a href="" style="color: black">
+          <router-link to="/order/all" style="color: black">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-order2"></use>
             </svg>
             <br><span>全部订单</span>
-          </a>
+          </router-link>
         </div>
         <div class="col-xs-3">
-          <a href="" style="color: black">
+          <router-link to="/order/pay" style="color: black">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-fukuan2"></use>
             </svg>
             <br><span>待付款</span>
-          </a>
+          </router-link>
         </div>
         <div class="col-xs-3">
-          <a href="" style="color: black">
+          <router-link to="/order/use" style="color: black">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-shiyong2"></use>
             </svg>
             <br><span>待使用</span>
-          </a>
+          </router-link>
         </div>
         <div class="col-xs-3">
-          <a href="" style="color: black">
+          <router-link to="/order/evaluate" style="color: black">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-evaluate2"></use>
             </svg>
             <br><span>待评价</span>
-          </a>
+          </router-link>
         </div>
       </div>
       <div class="row">
@@ -78,30 +78,30 @@
             <span>我的优惠券</span>
             <span class="text-right my-middle-list" style="">8&nbsp;&nbsp;></span>
           </router-link>
-          <a class="list-group-item">
+          <router-link to="/" class="list-group-item">
             <span>想看的电影</span>
             <span class="text-right my-middle-list" style="">4&nbsp;&nbsp;></span>
-          </a>
-          <a class="list-group-item">
+          </router-link>
+          <router-link to="/" class="list-group-item">
             <span>看过的电影</span>
             <span class="text-right my-middle-list" style="">14&nbsp;&nbsp;></span>
-          </a>
-          <a class="list-group-item">
+          </router-link>
+          <router-link to="/" class="list-group-item">
             <span>清理缓存</span>
             <span class="text-right my-middle-list" style="">&nbsp;&nbsp;></span>
-          </a>
-          <a class="list-group-item">
+          </router-link>
+          <router-link to="/" class="list-group-item">
             <span>意见反馈</span>
             <span class="text-right my-middle-list" style="">&nbsp;&nbsp;></span>
-          </a>
-          <a class="list-group-item">
+          </router-link>
+          <router-link to="/" class="list-group-item">
             <span>常见问题</span>
             <span class="text-right my-middle-list" style="">&nbsp;&nbsp;></span>
-          </a>
-          <a class="list-group-item">
+          </router-link>
+          <router-link to="/" class="list-group-item">
             <span>关于我们</span>
             <span class="text-right my-middle-list" style="">&nbsp;&nbsp;></span>
-          </a>
+          </router-link>
         </div>
       </div>
     </div>
@@ -147,11 +147,10 @@
     methods: {
       handleScroll(e) {
         if ($(".navbar").offset().top > 50) {
-          $(".navbar-fixed-top").addClass("top-nav");
-          //$(".navbar-fixed-top").style.border-bottom('1px solid');
+          $("#personal-head").addClass("top-nav");
           $("#title-center").show();
         } else {
-          $(".navbar-fixed-top").removeClass("top-nav");
+          $("#personal-head").removeClass("top-nav");
           $("#title-center").hide();
         }
       }

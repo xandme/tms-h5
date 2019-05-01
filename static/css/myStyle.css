@@ -86,11 +86,13 @@ a.message {
 #home-head > .row {
     padding: 10px 0;
 }
+#order-head > .row {
+    padding: 10px 0;
+}
 #home-head > .row:last-child {
     padding-bottom: 0;
 }
 #home-head {
-    border-bottom: 1px solid #8c8c8c;
     background-color: white;
 }
 #home-btn-group > button {
@@ -118,8 +120,22 @@ a.message {
     width: 48%;
     background-color: #11a3f2;
 }
+.date-list > .active-date-list {
+    color: #11a3f2;
+}
+.active-date-list:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: auto;
+    bottom: 6px;
+    right: auto;
+    height: 3px;
+    width: 100%;
+    background-color: #11a3f2;
+}
 .buy-ticket {
-    margin-top: 40px;
+    /*margin-top: 40px;*/
     border: 1px solid #11a3f2;
     background-color: #11a3f2;
     border-radius: 10px;
@@ -211,4 +227,28 @@ a.message {
 }
 .film-info {
     padding-top: 10px;
+}
+#orderHead > .col-xs-3 {
+    color: black;
+}
+#orderHead > .active-border {
+    color: #11a3f2;
+}
+#order-info > .row {
+    padding: 1px 0 7px;
+}
+#date-list > a {
+    text-align: center;
+    padding: 10px 15px 17px;
+    width: 27%;
+}
+#date-list {
+    margin-bottom: -7px;
+}
+.navbar-fixed-top {
+    width: 360px;
+}
+#arr-list > a {
+    width: 360px;
+    margin: 0;
 }

@@ -31,6 +31,11 @@ export default new Router({
       component: () => import('@/components/common/theaterList')
     },
     {
+      path: '/arrangementList',
+      name: 'arrangementList',
+      component: () => import('@/components/common/arrangementList')
+    },
+    {
       path: '/market',
       name: 'market',
       component: () => import('@/components/market/market')
@@ -66,9 +71,9 @@ export default new Router({
       component: () => import('@/components/personal/memberDetail')
     },
     {
-      path: '/order',
-      name: 'order',
-      component: () => import('@/components/personal/order')
+      path: '/order/all',
+      name: 'orderAll',
+      component: () => import('@/components/personal/orderAll')
     }
   ]
 })

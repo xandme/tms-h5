@@ -15,7 +15,7 @@
     <div class="container-fluid" style="padding: 60px 15px 0;min-height: 607px;background-color: #e6e6e6;">
       <div class="row" style="min-height: inherit;">
         <div class="col-xs-12 list-group" style="padding: 0 0 30px;margin: 0;min-height: inherit;">
-          <a class="list-group-item" href="" style="padding: 15px 40px;margin: 5px;border-radius: 5px;height: 130px;">
+          <router-link class="list-group-item" to="/" style="padding: 15px 40px;margin: 5px;border-radius: 5px;height: 130px;">
             <div class="row" style="">
               <div class="col-xs-3"
                    style="background-color: #6d6d6d;width: 50px;height: 50px;border-radius: 50%;padding: 0;margin-top: 15px;">
@@ -31,8 +31,8 @@
               </div>
               <div class="col-xs-3" style="">1</div>
             </div>
-          </a>
-          <a class="list-group-item" href="" style="padding: 15px 40px;margin: 5px;border-radius: 5px;height: 130px;">
+          </router-link>
+          <router-link to="/" class="list-group-item" href="" style="padding: 15px 40px;margin: 5px;border-radius: 5px;height: 130px;">
             <div class="row" style="">
               <div class="col-xs-3"
                    style="background-color: #6d6d6d;width: 50px;height: 50px;border-radius: 50%;padding: 0;margin-top: 15px;">
@@ -48,7 +48,7 @@
               </div>
               <div class="col-xs-3" style="">1</div>
             </div>
-          </a>
+          </router-link>
         </div>
       </div>
     </div>
