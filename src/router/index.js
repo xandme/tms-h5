@@ -36,6 +36,11 @@ export default new Router({
       component: () => import('@/components/common/arrangementList')
     },
     {
+      path: '/seatArea',
+      name: 'seatArea',
+      component: () => import('@/components/common/seatArea')
+    },
+    {
       path: '/market',
       name: 'market',
       component: () => import('@/components/market/market')

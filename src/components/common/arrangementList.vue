@@ -9,15 +9,16 @@
 						</svg>
 					</router-link>
 					<strong style="font-size: 16px;">重庆南岸区竖店电影城南坪店</strong>
-					<router-link style="margin-right: 20px;float: right;" to="/setting">
+					<a style="margin-right: 20px;float: right;" @click="favorite">
 						<svg class="icon" aria-hidden="true">
-							<use xlink:href="#icon-shoucang2"></use>
+							<use xlink:href="#icon-shoucang2" id="favor"></use>
 						</svg>
-					</router-link>
+					</a>
 				</div>
 			</div>
 		</nav>
 		<div class="container-fluid" style="padding: 60px 15px 0;min-height: 640px;">
+			<!--显示影院信息-->
 			<div class="row" style="padding: 10px 0;min-height: 70px;">
 				<div class="col-xs-12" style="padding: 3px 15px;">重庆南岸区竖店电影城南坪店</div>
 				<div class="col-xs-12" style="padding: 4px 15px;font-size: 12px;color: #c1c1c1;">南岸区南坪惠工路13号5楼（元旦购物广场）</div>
@@ -65,7 +66,7 @@
 							<span>41.5元</span>
 						</div>
 						<div class="col-xs-2" style="padding: 7px 10px;">
-							<button type="button" class="buy-ticket"><span>购票</span></button>
+							<router-link to="/seatArea"><button type="button" class="buy-ticket">购票</button></router-link>
 						</div>
 					</a>
 					<a href="#" class="row list-group-item">
@@ -108,7 +109,19 @@
 
 <script>
     export default {
-        name: "arrangementList"
+        name: "arrangementList",
+		methods: {
+            favorite () {
+                var favor = $('#favor');
+                if (favor.attr("xlink:href") === '#icon-shoucang2') {
+                    // 当影院未收藏时
+                    favor.attr("xlink:href",'#icon-shoucang1')
+				} else if (favor.attr("xlink:href") === '#icon-shoucang1'){
+                    //当已收藏该影院时
+                    favor.attr("xlink:href",'#icon-shoucang2')
+				}
+			}
+		}
     }
 </script>
 
