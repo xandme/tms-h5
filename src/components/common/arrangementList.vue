@@ -66,7 +66,9 @@
 							<span>41.5元</span>
 						</div>
 						<div class="col-xs-2" style="padding: 7px 10px;">
-							<router-link to="/seatArea"><button type="button" class="buy-ticket">购票</button></router-link>
+							<router-link to="/seatArea">
+								<button type="button" class="buy-ticket">购票</button>
+							</router-link>
 						</div>
 					</a>
 					<a href="#" class="row list-group-item">
@@ -110,18 +112,94 @@
 <script>
     export default {
         name: "arrangementList",
-		methods: {
-            favorite () {
+        data() {
+            return {
+                list: [{
+                    items: [],
+                    loading: false,
+                    finished: false,
+                    listQuery: {
+                        page_no: 0,
+                        page_size: 10,
+                        page_total: undefined,
+                        total: undefined
+                    }
+                }, {
+                    items: [],
+                    loading: false,
+                    finished: false,
+                    listQuery: {
+                        page_no: 0,
+                        page_size: 10,
+                        page_total: undefined,
+                        total: undefined,
+                        status: 0
+                    }
+                }, {
+                    items: [],
+                    loading: false,
+                    finished: false,
+                    listQuery: {
+                        page_no: 0,
+                        page_size: 10,
+                        page_total: undefined,
+                        total: undefined
+                    }
+                }]
+            }
+        },
+        methods: {
+            favorite() {
                 var favor = $('#favor');
                 if (favor.attr("xlink:href") === '#icon-shoucang2') {
                     // 当影院未收藏时
-                    favor.attr("xlink:href",'#icon-shoucang1')
-				} else if (favor.attr("xlink:href") === '#icon-shoucang1'){
+                    favor.attr("xlink:href", '#icon-shoucang1')
+                } else if (favor.attr("xlink:href") === '#icon-shoucang1') {
                     //当已收藏该影院时
-                    favor.attr("xlink:href",'#icon-shoucang2')
-				}
-			}
-		}
+                    favor.attr("xlink:href", '#icon-shoucang2')
+                }
+            },
+            getList(index) {
+                const list = this.list[index];
+                list.listQuery.page_no = list.listQuery.page_no + 1;
+                if (index !== 2) {
+                    arrangeList(list.listQuery).then(response => {
+                            console.log(response);
+                            list.items = list.items.concat(response.extra.data);
+                            list.listQuery.page_total = response.extra.page_total;
+                            list.listQuery.total = response.extra.total;
+                            list.listQuery.page_no++;
+                            // 加载状态结束
+                            list.loading = false;
+                            // 数据全部加载完成
+                            if (list.listQuery.page_no >= list.listQuery.page_total) {
+                                list.finished = true;
+                            }
+                        }
+                    )
+                } else {
+                    fetchTheaterList(list.listQuery).then(response => {
+                            console.log(response);
+                            list.items = list.items.concat(response.extra.data);
+                            list.listQuery.page_total = response.extra.page_total;
+                            list.listQuery.total = response.extra.total;
+                            list.listQuery.page_no++;
+                            // 加载状态结束
+                            list.loading = false;
+                            // 数据全部加载完成
+                            if (list.listQuery.page_no >= list.listQuery.page_total) {
+                                list.finished = true
+                            }
+                        }
+                    )
+                }
+            },
+            onLoad(index) {
+                setTimeout(() => {
+                    this.getList(index)
+                }, 1000)
+            }
+        }
     }
 </script>
 

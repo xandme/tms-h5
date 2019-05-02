@@ -14,8 +14,8 @@
           </router-link>
         </div>
         <div id="filmHead" class="row text-center" style="color: #0f0f0f;padding-bottom: 0;">
-          <div class="film-hot-tab col-xs-6 active-border" @click="cutTab">正在热映</div>
-          <div class="film-coming-tab col-xs-6" @click="cutTab">即将上映</div>
+          <div class="film-hot-tab col-xs-6 active-border" @click="cutTab(1)">正在热映</div>
+          <div class="film-coming-tab col-xs-6" @click="cutTab(2)">即将上映</div>
         </div>
         <div id="theaterHead" class="row text-center" style="color: #0f0f0f;display: none;">
           <div class="col-xs-6" style="padding-bottom: 10px;">全城
@@ -204,25 +204,18 @@
 
     },
     methods: {
-      cutTab() {
-        const index = 2
-        if (index == 2) {
-          $('#coming-film-list').show()
-          $('#home-film-list').hide()
-          $('.film-hot-tab').removeClass('active-border')
-          $('.film-coming-tab').addClass('active-border')
-        } else if (index == 1) {
-          $('#coming-film-list').hide()
-          $('#home-film-list').show()
-          $('.film-coming-tab').removeClass('active-border')
+      cutTab(index) {
+        if (index === 1) {
+          $('#coming-film-list').hide();
+          $('#home-film-list').show();
+          $('.film-coming-tab').removeClass('active-border');
           $('.film-hot-tab').addClass('active-border')
+        } else if (index === 2) {
+          $('#coming-film-list').show();
+          $('#home-film-list').hide();
+          $('.film-hot-tab').removeClass('active-border');
+          $('.film-coming-tab').addClass('active-border')
         }
-      },
-      toArrange() {
-        this.$router.push('/arrangementList')
-      },
-      cutTab() {
-
       },
       getList(index) {
         const list = this.list[index]
@@ -263,9 +256,6 @@
         setTimeout(() => {
           this.getList(index)
         }, 1000)
-      },
-      cutTab(index) {
-
       }
     }
   }

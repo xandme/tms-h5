@@ -170,7 +170,7 @@
         } else if (type === 3) {
           this.typeName = "小吃"
         } else if (type === 4) {
-          this.typeName = "3D眼睛"
+          this.typeName = "3D眼镜"
         }
         this.listQuery.type = type
         this.listQuery.page_no = 0

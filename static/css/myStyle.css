@@ -1,3 +1,10 @@
+html, body {
+    width:360px;
+    height:640px;
+}
+.navbar-fixed-bottom {
+    width: 360px;
+}
 .icon {
     width: 1em;
     height: 1em;
@@ -33,8 +40,6 @@
     background-color:#9d9d9d;
     /*filter:Alpha(opacity=10);*/
 }
-/*div {font-family: "Kristen ITC";}*/
-html, body {width:100%;height:100%;} /*非常重要的样式让背景图片100%适应整个屏幕*/
 .my-navbar {padding:10px 0;transition: background 0.5s ease-in-out, padding 0.5s ease-in-out;}
 .my-navbar a{background:transparent !important;color:#fff !important}
 .my-navbar a:hover {color:#45bcf9 !important;background:transparent;outline:0}
@@ -257,7 +262,7 @@ a.message {
     padding: 5px 0;
 }
 #seat_title > .col-xs-12 {
-    padding: 2px 15px;
+    padding: 2px 30px;
 }
 #seat_title > .col-xs-12:first-child {
     font-size: 16px;
