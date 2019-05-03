@@ -7,3 +7,11 @@ export function fetchList(query) {
     params: query
   })
 }
+
+export function checkOut(data) {
+  return request({
+      url: '/goodsinfo/order/checkout',
+    method: 'post',
+    data
+  })
+}

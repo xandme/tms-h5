@@ -52,7 +52,9 @@
                       </div>
                     </div>
                     <div class="col-xs-3" style="padding: 0;margin-top: 40px;">
-                      <router-link to="/arrangementList"><button type="button" class="buy-ticket">购票</button></router-link>
+                      <router-link :to="{name:'arrangementList',query:{filmid:item.filmId}}">
+                        <button type="button" class="buy-ticket">购票</button>
+                      </router-link>
                     </div>
                   </div>
                 </div>
@@ -83,7 +85,7 @@
                       </div>
                     </div>
                     <div class="col-xs-3" style="padding: 0;">
-                      <button type="button" class="buy-ticket"><span>购票</span></button>
+                      <button type="button" class="buy-ticket" @click="handleBuy(item.filmId)"><span>购票</span></button>
                     </div>
                   </div>
                 </div>
@@ -256,6 +258,9 @@
         setTimeout(() => {
           this.getList(index)
         }, 1000)
+      },
+      handleBuy(id) {
+
       }
     }
   }

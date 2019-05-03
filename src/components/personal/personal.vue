@@ -1,20 +1,20 @@
 <template>
   <div>
-    <nav id="personal-head" class="navbar navbar-fixed-top my-navbar" role="navigation" style="">
+    <nav class="navbar navbar-fixed-top my-navbar" role="navigation" style="">
       <div class="container-fluid">
         <div class="navbar-header">
-          <div class="row text-center">
-		    <router-link to="/setting" class="col-xs-1 set">
+          <div class="row">
+            <a class="col-xs-1 set" href="/tms/setting">
               <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-shezhi"></use>
               </svg>
-            </router-link>
-            <strong id="title-center">我的</strong>
-            <router-link to="/" class="message">
+            </a>
+            <strong class="col-xs-3" id="title-center">我的</strong>
+            <a class="message">
               <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-xiaoxi2"></use>
               </svg>
-            </router-link>
+            </a>
           </div>
         </div>
       </div>
@@ -35,37 +35,29 @@
         </div>
       </div>
       <div class="row text-center my-middle">
-        <div class="col-xs-3">
-          <router-link to="/order/all" style="color: black">
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-order2"></use>
-            </svg>
-            <br><span>全部订单</span>
-          </router-link>
+        <div class="col-xs-3" style="color: black" @click="handleOrder">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-order2"></use>
+          </svg>
+          <br><span>全部订单</span>
         </div>
-        <div class="col-xs-3">
-          <router-link to="/order/pay" style="color: black">
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-fukuan2"></use>
-            </svg>
-            <br><span>待付款</span>
-          </router-link>
+        <div class="col-xs-3" style="color: black">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-fukuan2"></use>
+          </svg>
+          <br><span>待付款</span>
         </div>
-        <div class="col-xs-3">
-          <router-link to="/order/use" style="color: black">
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-shiyong2"></use>
-            </svg>
-            <br><span>待使用</span>
-          </router-link>
+        <div class="col-xs-3" style="color: black">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-shiyong2"></use>
+          </svg>
+          <br><span>待使用</span>
         </div>
-        <div class="col-xs-3">
-          <router-link to="/order/evaluate" style="color: black">
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-evaluate2"></use>
-            </svg>
-            <br><span>待评价</span>
-          </router-link>
+        <div class="col-xs-3" style="color: black">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-evaluate2"></use>
+          </svg>
+          <br><span>待评价</span>
         </div>
       </div>
       <div class="row">
@@ -146,13 +138,18 @@
     },
     methods: {
       handleScroll(e) {
+        console.log(111)
         if ($(".navbar").offset().top > 50) {
-          $("#personal-head").addClass("top-nav");
+          $(".navbar-fixed-top").addClass("top-nav");
+          //$(".navbar-fixed-top").style.border-bottom('1px solid');
           $("#title-center").show();
         } else {
-          $("#personal-head").removeClass("top-nav");
+          $(".navbar-fixed-top").removeClass("top-nav");
           $("#title-center").hide();
         }
+      },
+      handleOrder(index) {
+        this.$router.push("/order/all")
       }
     }
   }

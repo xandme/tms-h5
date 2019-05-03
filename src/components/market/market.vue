@@ -2,7 +2,9 @@
   <div>
     <div class="row"
          style="background-color:white;position: fixed;z-index:1030;padding: 60px 15px 0;border-bottom:1px solid gray;width: 100%;">
-      <div class="col-xs-12" style="">南岸区竖店电影城.<router-link to="/theater">切换</router-link></div>
+      <div class="col-xs-12" style="">南岸区竖店电影城.
+        <router-link to="/theater">切换</router-link>
+      </div>
     </div>
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container" style="margin-top:15px;">
@@ -48,7 +50,7 @@
                 <span>{{ item.goodsName }}</span><br>
                 <span style="font-size: 12px;">{{ item.goodsDescription }}</span><br>
                 <div style="color:red;padding-top: 13px;padding-left: 5px;width: 150px;">￥{{ item.goodsPrice }}
-                  <svg class="icon" aria-hidden="true" style="float: right;">
+                  <svg class="icon" aria-hidden="true" style="float: right;" @click="addCart(item)">
                     <use xlink:href="#icon-jiahao"></use>
                   </svg>
                 </div>
@@ -71,10 +73,10 @@
                 </svg>
               </a>
             </div>
-            <div class="col-xs-1" style="color: white;padding-top: 10px;">￥0</div>
+            <div class="col-xs-1" style="color: white;padding-top: 10px;">￥{{ totalPrice }}</div>
             <div class="col-xs-5 col-xs-offset-4 text-center"
                  style="background-color: #e38d13;height: 40px;float: right;margin-right: -15px;">
-              <div style="padding-top: 10px;">结算(0)</div>
+              <div style="padding-top: 10px;" @click="handleCheckout">结算({{ totalNum }})</div>
               <!--<button style="border-radius: 10px;border: 0;background-color: #e38d13">结&nbsp;&nbsp;&nbsp;&nbsp;算</button>-->
             </div>
           </li>
@@ -115,7 +117,7 @@
 </template>
 
 <script>
-  import {fetchList} from "@/api/goods_info"
+  import {fetchList, checkOut} from "@/api/goods_info"
 
   export default {
     name: "market",
@@ -133,7 +135,26 @@
           page_total: undefined,
           total: undefined,
           type: ""
+        },
+        cartList: [],
+        cart: {
+          list: [],
+          totalPrice: 0
         }
+      }
+    },
+    computed: {
+      totalPrice() {
+        let totalPrice = 0
+        for (let i = 0; i < this.cart.list.length; i++) {
+          let item = this.cart.list[i]
+          console.log(item)
+          totalPrice += item.goodsPrice * item.quantity
+        }
+        return totalPrice
+      },
+      totalNum() {
+        return this.cart.list.length
       }
     },
     methods: {
@@ -176,6 +197,16 @@
         this.listQuery.page_no = 0
         this.list = []
         this.getList()
+      },
+      addCart(row) {
+        row.quantity = 1
+        this.cart.list.push(row)
+      },
+      handleCheckout() {
+        this.cart.totalPrice = this.totalPrice
+        checkOut(this.cart).then(response => {
+          this.$toast.success('结算成功')
+        })
       }
     }
   }
