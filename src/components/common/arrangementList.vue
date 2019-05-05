@@ -3,11 +3,11 @@
     <nav class="navbar navbar-default navbar-fixed-top" style="top:0;">
       <div class="container" style="margin-top:15px;">
         <div class="row text-center">
-          <router-link class="col-xs-1" style="" to="/">
+          <div class="col-xs-1" @click="handleBack">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-fanhui"></use>
             </svg>
-          </router-link>
+          </div>
           <strong style="font-size: 16px;">{{ theater.theaterName }}</strong>
           <a style="margin-right: 20px;float: right;" @click="favorite">
             <svg class="icon" aria-hidden="true">
@@ -45,65 +45,53 @@
         </div>
       </div>
       <div id="date-list" class="row row-horizon list-group">
-        <a class="col-xs-3 list-group-item active-date-list">5月1日</a>
+        <!--<a class="col-xs-3 list-group-item active-date-list">5月1日</a>-->
         <!--<a class="col-xs-3 list-group-item">5月2日</a>-->
         <!--<a class="col-xs-3 list-group-item">5月3日</a>-->
         <!--<a class="col-xs-3 list-group-item">5月4日</a>-->
         <!--<a class="col-xs-3 list-group-item">5月5日</a>-->
         <!--<a class="col-xs-3 list-group-item">5月6日</a>-->
-        <a class="col-xs-3 list-group-item" v-for="item in arrangementDate" :key="item.arrangementId">{{item.date}}</a>
+        <a class="col-xs-3 list-group-item" v-for="(item,index) in arrangementDate" :key="item.date"
+           @click="handleHall(item.date,index)" :class="{'active-date-list':index==current }">{{item.formatDate}}</a>
 
       </div>
       <div class="row">
         <div id="arr-list" class="col-xs-12 list-group" style="padding: 0;margin: 0;bottom: 0;">
-          <a href="#" class="row list-group-item">
+          <!--<a href="#" class="row list-group-item">-->
+          <!--<div class="col-xs-2" style="padding-right: 0;width: 75px;">-->
+          <!--<div style="font-size: 16px;">09:30</div>-->
+          <!--<div style="font-size: 12px;color: #c1c1c1;">12:31散场</div>-->
+          <!--</div>-->
+          <!--<div class="col-xs-3 text-center">-->
+          <!--<div style="font-size: 12px;padding: 2px 0;">英语</div>-->
+          <!--<div style="font-size: 12px;color: #c1c1c1;">1号厅</div>-->
+          <!--</div>-->
+          <!--<div class="col-xs-4 text-right" style="font-size: 18px;color: #11a3f2;">-->
+          <!--<span>41.5元</span>-->
+          <!--</div>-->
+          <!--<div class="col-xs-2" style="padding: 7px 10px;">-->
+          <!--<router-link to="/seatArea">-->
+          <!--<button type="button" class="buy-ticket">购票</button>-->
+          <!--</router-link>-->
+          <!--</div>-->
+          <!--</a>-->
+          <a v-for="item in list" :key="item.arrangementId" href="#" class="row list-group-item">
             <div class="col-xs-2" style="padding-right: 0;width: 75px;">
-              <div style="font-size: 16px;">09:30</div>
-              <div style="font-size: 12px;color: #c1c1c1;">12:31散场</div>
+              <div style="font-size: 16px;">{{ item.time }}</div>
+              <div style="font-size: 12px;color: #c1c1c1;">{{ item.offTime }}散场</div>
             </div>
             <div class="col-xs-3 text-center">
-              <div style="font-size: 12px;padding: 2px 0;">英语</div>
-              <div style="font-size: 12px;color: #c1c1c1;">1号厅</div>
+              <div style="font-size: 12px;padding: 2px 0;">{{ item.language }}</div>
+              <div style="font-size: 12px;color: #c1c1c1;">{{ item.filmHallName }}</div>
             </div>
             <div class="col-xs-4 text-right" style="font-size: 18px;color: #11a3f2;">
-              <span>41.5元</span>
+              <span>{{ item.price }}元</span>
             </div>
             <div class="col-xs-2" style="padding: 7px 10px;">
-              <router-link to="/seatArea">
+              <router-link
+                :to="{name: 'seatArea', query: {arrangementId: item.arrangementId,hallId:item.filmHallNumber,filmId:item.filmId}}">
                 <button type="button" class="buy-ticket">购票</button>
               </router-link>
-            </div>
-          </a>
-          <a href="#" class="row list-group-item">
-            <div class="col-xs-2" style="padding-right: 0;width: 75px;">
-              <div style="font-size: 16px;">12:50</div>
-              <div style="font-size: 12px;color: #c1c1c1;">15:51散场</div>
-            </div>
-            <div class="col-xs-3 text-center">
-              <div style="font-size: 12px;padding: 2px 0;">英语</div>
-              <div style="font-size: 12px;color: #c1c1c1;">1号厅</div>
-            </div>
-            <div class="col-xs-4 text-right" style="font-size: 18px;color: #11a3f2;padding-top: 5px;">
-              <span>41.5元</span>
-            </div>
-            <div class="col-xs-2" style="padding: 7px 10px;">
-              <button type="button" class="buy-ticket"><span>购票</span></button>
-            </div>
-          </a>
-          <a href="#" class="row list-group-item">
-            <div class="col-xs-2" style="padding-right: 0;width: 75px;">
-              <div style="font-size: 16px;">12:50</div>
-              <div style="font-size: 12px;color: #c1c1c1;">15:51散场</div>
-            </div>
-            <div class="col-xs-3 text-center">
-              <div style="font-size: 12px;padding: 2px 0;">英语</div>
-              <div style="font-size: 12px;color: #c1c1c1;">1号厅</div>
-            </div>
-            <div class="col-xs-4 text-right" style="font-size: 18px;color: #11a3f2;">
-              <span>41.5元</span>
-            </div>
-            <div class="col-xs-2" style="padding: 7px 10px;">
-              <button type="button" class="buy-ticket"><span>购票</span></button>
             </div>
           </a>
         </div>
@@ -126,6 +114,7 @@
         theater: '',
         arrangementDate: '',
         list: '',
+        current: 0
       }
     },
     created() {
@@ -138,7 +127,7 @@
       this.getDate(filmId)
     },
     mounted() {
-      this.getList(this.filmId)
+      // this.getList(this.filmId, this.arrangementDate[0].date)
     },
     methods: {
       favorite() {
@@ -204,12 +193,24 @@
       getDate(id) {
         getArrangementDate(id).then(response => {
           this.arrangementDate = response.extra
+          console.log(response.extra)
+          if (response.extra !== null && response.extra.length > 0) {
+            this.getList(id, this.arrangementDate[0].date)
+          }
         })
       },
-      getList(id) {
-        getHallList(id).then(response => {
+      getList(id, date) {
+        getHallList(id, date).then(response => {
           this.list = response.extra
         })
+      },
+      handleHall(date, index) {
+        this.current = index
+        console.log(date)
+        this.getList(this.filmId, date)
+      },
+      handleBack() {
+        this.$router.go(-1)
       }
     }
   }

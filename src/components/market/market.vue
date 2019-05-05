@@ -206,6 +206,7 @@
         this.cart.totalPrice = this.totalPrice
         checkOut(this.cart).then(response => {
           this.$toast.success('结算成功')
+          this.$router.push('/personal')
         })
       }
     }

@@ -29,9 +29,26 @@ export function getArrangementDate(id) {
   })
 }
 
-export function getHallList(id) {
+export function getHallList(id, date) {
   return request({
     url: '/theaterinfo/hall/' + id + '/list',
-    method: 'get'
+    method: 'get',
+    params: {'date': date}
+  })
+}
+
+export function getArrangementHallSeat(aid, hid) {
+  return request({
+    url: '/theaterinfo/arrangement/hall/seat',
+    method: 'get',
+    params: {'arrangement_id': aid, 'hall_id': hid}
+  })
+}
+
+export function getArrangementDetail(id) {
+  return request({
+    url: '/theaterinfo/arrangement/' + id + '/detail',
+    method: 'get',
+    params: {'arrangement_id': id}
   })
 }

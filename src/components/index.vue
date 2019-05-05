@@ -14,8 +14,8 @@
           </router-link>
         </div>
         <div id="filmHead" class="row text-center" style="color: #0f0f0f;padding-bottom: 0;">
-          <div class="film-hot-tab col-xs-6 active-border" @click="cutTab(1)">正在热映</div>
-          <div class="film-coming-tab col-xs-6" @click="cutTab(2)">即将上映</div>
+          <div class="col-xs-6" :class="current==0?'active-border':''" @click="handleTab(1,0)">正在热映</div>
+          <div class="col-xs-6" :class="current==1?'active-border':''" @click="handleTab(0,1)">即将上映</div>
         </div>
         <div id="theaterHead" class="row text-center" style="color: #0f0f0f;display: none;">
           <div class="col-xs-6" style="padding-bottom: 10px;">全城
@@ -33,7 +33,7 @@
         <div id="home-film-list" class="col-xs-12 list-group my-list-group">
           <van-list v-model="list[0].loading" :finished="list[0].finished" finished-text="没有更多了" @load="onLoad(0)">
             <div v-for="item in list[0].items" :key="item.filmId">
-              <router-link to="/" class="list-group-item row">
+              <div class="list-group-item row">
                 <div class="col-xs-3" style="padding: 0;">
                   <img :src="item.url" style="height: 100px;width: 70px;">
                 </div>
@@ -52,44 +52,11 @@
                       </div>
                     </div>
                     <div class="col-xs-3" style="padding: 0;margin-top: 40px;">
-                      <router-link :to="{name:'arrangementList',query:{filmid:item.filmId}}">
-                        <button type="button" class="buy-ticket">购票</button>
-                      </router-link>
+                      <button type="button" class="buy-ticket" @click="handleBuy(item)">购票</button>
                     </div>
                   </div>
                 </div>
-              </router-link>
-            </div>
-          </van-list>
-        </div>
-
-        <div id="coming-film-list" class="col-xs-12 list-group my-list-group" style="display: none">
-          <van-list v-model="list[1].loading" :finished="list[1].finished" finished-text="没有更多了" @load="onLoad(1)">
-            <div v-for="item in list[1].items" :key="item.filmId">
-              <a class="list-group-item row">
-                <div class="col-xs-3" style="padding: 0;">
-                  <img :src="item.url" style="height: 100px;width: 70px;">
-                </div>
-                <div class="col-xs-9">
-                  <div class="row">
-                    <div class="col-xs-12">
-                      <strong class="">{{ item.filmName }}</strong>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-xs-9">
-                      <div class="row">
-                        <div class="col-xs-12">评分：&nbsp;{{ item.filmAvgScore * 10 | numFilter }}</div>
-                        <div class="col-xs-12 overflow" style="width:181px;">导演：&nbsp;{{ item.director }}</div>
-                        <div class="col-xs-12 overflow" style="width:181px;">主演：&nbsp;{{ item.mainActor }}</div>
-                      </div>
-                    </div>
-                    <div class="col-xs-3" style="padding: 0;">
-                      <button type="button" class="buy-ticket" @click="handleBuy(item.filmId)"><span>购票</span></button>
-                    </div>
-                  </div>
-                </div>
-              </a>
+              </div>
             </div>
           </van-list>
         </div>
@@ -152,6 +119,7 @@
     name: "index",
     data() {
       return {
+        current: 0,
         list: [{
           items: [],
           loading: false,
@@ -160,7 +128,8 @@
             page_no: 0,
             page_size: 10,
             page_total: undefined,
-            total: undefined
+            total: undefined,
+            status: 1
           }
         }, {
           items: [],
@@ -206,24 +175,12 @@
 
     },
     methods: {
-      cutTab(index) {
-        if (index === 1) {
-          $('#coming-film-list').hide();
-          $('#home-film-list').show();
-          $('.film-coming-tab').removeClass('active-border');
-          $('.film-hot-tab').addClass('active-border')
-        } else if (index === 2) {
-          $('#coming-film-list').show();
-          $('#home-film-list').hide();
-          $('.film-hot-tab').removeClass('active-border');
-          $('.film-coming-tab').addClass('active-border')
-        }
-      },
       getList(index) {
-        const list = this.list[index]
+        let list = this.list[index]
         list.listQuery.page_no = list.listQuery.page_no + 1
         if (index !== 2) {
           fetchList(list.listQuery).then(response => {
+              console.log('here')
               console.log(response)
               list.items = list.items.concat(response.extra.data)
               list.listQuery.page_total = response.extra.page_total
@@ -239,6 +196,7 @@
           )
         } else {
           fetchTheaterList(list.listQuery).then(response => {
+              console.log('there')
               console.log(response)
               list.items = list.items.concat(response.extra.data)
               list.listQuery.page_total = response.extra.page_total
@@ -253,14 +211,35 @@
             }
           )
         }
+        console.log("???")
+        console.log(this.list[index])
       },
       onLoad(index) {
         setTimeout(() => {
           this.getList(index)
         }, 1000)
       },
-      handleBuy(id) {
-
+      handleTab(status, index) {
+        this.resetList(index)
+        this.list[0].listQuery.status = status
+        this.current = index
+        console.log(this.list[0])
+        console.log(status, index)
+        this.getList(0)
+      },
+      resetList(index) {
+        this.list[0].items = []
+        this.list[0].loading = true
+        this.list[0].finished = false
+        this.list[0].listQuery.page_no = 0
+        console.log(this.list[0])
+      },
+      handleBuy(item) {
+        if (item.filmStatus === 0) {
+          this.$toast("影片暂未上映，敬请期待！")
+        } else {
+          this.$router.push({name: 'arrangementList', query: {filmid: item.filmId}})
+        }
       }
     }
   }
