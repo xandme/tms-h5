@@ -1,8 +1,8 @@
 import axios from 'axios'
 import {Toast} from 'vant'
 
-const baseurl = "http://localhost:8099";
-// const baseurl = "http://172.20.10.3:8099";
+// const baseurl = "http://localhost:8099";
+const baseurl = "http://129.204.230.203:8099";
 
 // 创建axios实例
 const service = axios.create({

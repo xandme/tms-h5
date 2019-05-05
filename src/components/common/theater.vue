@@ -2,65 +2,78 @@
   <div>
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container" style="margin-top:15px;">
-        <div class="row" style="padding-left: 15px;">
+        <div class="row text-center">
           <router-link class="col-xs-1" to="/market">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-fanhui"></use>
             </svg>
           </router-link>
-          <strong class="col-xs-4" id="title"
-                  style="text-align: center;font-size: 16px;margin-left: 95px;">影城列表</strong>
-          <a class="col-xs-3" style="padding-right: 0;">
-            <!--<svg class="icon" aria-hidden="true">-->
-            <!--<use xlink:href="#icon-fanhui"></use>-->
-            <!--</svg>-->
-            <span>重庆市</span>
-          </a>
+          <strong id="title" style="font-size: 16px;">影城列表</strong>
         </div>
       </div>
     </nav>
     <div class="container-fluid" style="padding: 60px 15px;">
       <div class="row">
-        <!--<div style="padding: 0;">-->
-        <ul class="col-xs-12 list-group my-list-group">
-          <li class="list-group-item">
-            <span>影院名称</span><br>
-            <span>影院地址theaterAddress</span>
-          </li>
-          <li class="list-group-item">
-            <span>影院名称</span><br>
-            <span>影院地址theaterAddress</span>
-          </li>
-          <li class="list-group-item">
-            <span>影院名称</span><br>
-            <span>影院地址theaterAddress</span>
-          </li>
-          <li class="list-group-item">
-            <span>影院名称</span><br>
-            <span>影院地址theaterAddress</span>
-          </li>
-          <li class="list-group-item">
-            <span>影院名称</span><br>
-            <span>影院地址theaterAddress</span>
-          </li>
-          <li class="list-group-item">
-            <span>影院名称</span><br>
-            <span>影院地址theaterAddress</span>
-          </li>
-          <li class="list-group-item">
-            <span>影院名称</span><br>
-            <span>影院地址theaterAddress</span>
-          </li>
-        </ul>
-        <!--</div>-->
+        <van-list v-model="list[0].loading" :finished="list[0].finished" finished-text="没有更多了" @load="onLoad()">
+          <div v-for="item in list[0].items" :key="item.theaterId">
+            <a class="list-group-item row">
+              <div class="col-xs-12">{{ item.theaterName }}</div>
+              <div class="col-xs-12" style="font-size: 11px;">{{ item.theaterAddress }}</div>
+              <div class="col-xs-12">{{ item.phoneNumber }}</div>
+              <div class="col-xs-12">收藏标记</div>
+            </a>
+          </div>
+        </van-list>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+  import {fetchList as fetchTheaterList} from "@/api/theater_info"
+
   export default {
-    name: "Theater"
+    name: "Theater",
+    data() {
+      return {
+        list: [{
+          items: [],
+          loading: false,
+          finished: false,
+          listQuery: {
+            page_no: 0,
+            page_size: 10,
+            page_total: undefined,
+            total: undefined
+          }
+        }]
+      }
+    },
+    methods: {
+      getList() {
+        const list = this.list[0];
+        list.listQuery.page_no = list.listQuery.page_no + 1;
+        fetchTheaterList(list.listQuery).then(response => {
+              console.log(response);
+              list.items = list.items.concat(response.extra.data);
+              list.listQuery.page_total = response.extra.page_total;
+              list.listQuery.total = response.extra.total;
+              list.listQuery.page_no++;
+              // 加载状态结束
+              list.loading = false;
+              // 数据全部加载完成
+              if (list.listQuery.page_no >= list.listQuery.page_total) {
+                list.finished = true;
+              }
+            }
+        )
+      },
+      onLoad() {
+        setTimeout(() => {
+          this.getList();
+        }, 1000)
+      }
+    }
   }
 </script>
 
