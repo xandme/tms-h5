@@ -57,25 +57,7 @@
       </div>
       <div class="row">
         <div id="arr-list" class="col-xs-12 list-group" style="padding: 0;margin: 0;bottom: 0;">
-          <!--<a href="#" class="row list-group-item">-->
-          <!--<div class="col-xs-2" style="padding-right: 0;width: 75px;">-->
-          <!--<div style="font-size: 16px;">09:30</div>-->
-          <!--<div style="font-size: 12px;color: #c1c1c1;">12:31散场</div>-->
-          <!--</div>-->
-          <!--<div class="col-xs-3 text-center">-->
-          <!--<div style="font-size: 12px;padding: 2px 0;">英语</div>-->
-          <!--<div style="font-size: 12px;color: #c1c1c1;">1号厅</div>-->
-          <!--</div>-->
-          <!--<div class="col-xs-4 text-right" style="font-size: 18px;color: #11a3f2;">-->
-          <!--<span>41.5元</span>-->
-          <!--</div>-->
-          <!--<div class="col-xs-2" style="padding: 7px 10px;">-->
-          <!--<router-link to="/seatArea">-->
-          <!--<button type="button" class="buy-ticket">购票</button>-->
-          <!--</router-link>-->
-          <!--</div>-->
-          <!--</a>-->
-          <a v-for="item in list" :key="item.arrangementId" href="#" class="row list-group-item">
+          <div v-for="item in list" :key="item.arrangementId" class="row list-group-item">
             <div class="col-xs-2" style="padding-right: 0;width: 75px;">
               <div style="font-size: 16px;">{{ item.time }}</div>
               <div style="font-size: 12px;color: #c1c1c1;">{{ item.offTime }}散场</div>
@@ -93,7 +75,7 @@
                 <button type="button" class="buy-ticket">购票</button>
               </router-link>
             </div>
-          </a>
+          </div>
         </div>
       </div>
     </div>
