@@ -30,10 +30,10 @@
       <div class="row" style="min-height: inherit;">
         <div class="col-xs-12 list-group" style="padding: 0 0 30px;margin: 0;min-height: inherit;">
           <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
-            <div v-for="(item,index) in list" :key="index" class="list-group-item"
+            <div v-for="(item,index) in list" :key="index" class="list-group-item" @click="toPayment(item)"
                  style="padding: 10px 15px;margin: 15px;border-radius: 10px;">
               <div class="row" style="font-size: 13px;">
-                <div class="col-xs-8">{{ item.theaterDescription }}</div>
+                <div class="col-xs-8">{{ item.theaterName }}</div>
                 <div class="" style="float: right;margin-right: 15px;">{{ item.orderStatus | statusFilter }}</div>
               </div>
               <div class="row"
@@ -161,7 +161,22 @@
         this.finished = false
         this.listQuery.page_no = 0
         this.listQuery.status = status
-      }
+      },
+			toPayment(item) {
+				if (item.orderStatus === 0) {
+					this.$router.push(
+						{
+							name: 'payment',
+							query: {
+								filmOrderId: item.orderId,
+								arrangementId: item.arrangementId,
+								hallId:item.filmHallNumber,
+								filmId:item.filmId
+							}
+						}
+					);
+				}
+			}
     }
   }
 </script>
