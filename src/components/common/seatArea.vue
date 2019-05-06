@@ -35,8 +35,8 @@
     <nav class="navbar navbar-default navbar-fixed-bottom">
       <div class="container">
         <div class="row text-center">
-          <div class="col-xs-12" style="height: 50px;line-height: 50px;" @click="handleConfirm"><b>￥<span
-            id="total_price">{{ computeTicketPrice }}</span></b>确认选座
+          <div class="col-xs-12" style="height: 50px;line-height: 50px;" @click="handleConfirm">
+						<b>￥<span id="total_price">{{ computeTicketPrice }}</span></b>确认选座
           </div>
         </div>
       </div>
@@ -187,8 +187,10 @@
           this.form.totalAmount = this.computeTicketPrice
           this.form.price = this.price
           confirmSeatSelected(this.form).then(response => {
-            this.$toast.success('订单已生成！')
-            this.$router.push('/personal')
+            // this.$toast.success('订单已生成！')
+							console.log(response);
+							//此处传订单编号影片编号、影院编号
+            this.$router.push({name: 'payment', query: {filmOrderId: '12',arrangementId: this.aid,hallId:this.hid,filmId:this.filmId}})
           })
           console.log(this.form)
         }
