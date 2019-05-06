@@ -35,37 +35,29 @@
         </div>
       </div>
       <div class="row text-center my-middle">
-        <div class="col-xs-3">
-          <router-link to="/order/all" style="color: black">
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-order2"></use>
-            </svg>
-            <br><span>全部订单</span>
-          </router-link>
+        <div class="col-xs-3" style="color: black" @click="handleOrder(0)">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-order2"></use>
+          </svg>
+          <br><span>全部订单</span>
         </div>
-        <div class="col-xs-3">
-          <router-link to="/order/pay" style="color: black">
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-fukuan2"></use>
-            </svg>
-            <br><span>待付款</span>
-          </router-link>
+        <div class="col-xs-3" style="color: black" @click="handleOrder(1)">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-fukuan2"></use>
+          </svg>
+          <br><span>待付款</span>
         </div>
-        <div class="col-xs-3">
-          <router-link to="/order/use" style="color: black">
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-shiyong2"></use>
-            </svg>
-            <br><span>待使用</span>
-          </router-link>
+        <div class="col-xs-3" style="color: black" @click="handleOrder(2)">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-shiyong2"></use>
+          </svg>
+          <br><span>待使用</span>
         </div>
-        <div class="col-xs-3">
-          <router-link to="/order/evaluate" style="color: black">
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-evaluate2"></use>
-            </svg>
-            <br><span>待评价</span>
-          </router-link>
+        <div class="col-xs-3" style="color: black" @click="handleOrder(3)">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-evaluate2"></use>
+          </svg>
+          <br><span>待评价</span>
         </div>
       </div>
       <div class="row">
@@ -153,6 +145,9 @@
           $("#personal-head").removeClass("top-nav");
           $("#title-center").hide();
         }
+      },
+      handleOrder(index) {
+        this.$router.push({name:'/orderAll',query:{index: index}})
       }
     }
   }

@@ -116,6 +116,8 @@
       }
     },
     created() {
+			this.current = this.$route.query.index;
+			this.listQuery.status = this.current;
       this.getList()
     },
     methods: {

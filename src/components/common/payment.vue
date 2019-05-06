@@ -36,7 +36,7 @@
 								<div class="col-xs-12">{{ arrangement.time }}</div>
 								<div class="col-xs-12">{{ arrangement.film_hall_number }}号厅</div>
 								<div class="col-xs-12">1排1座&nbsp;1排2座&nbsp;</div>
-								<div class="col-xs-12">小计￥{{ filmOrder.order_amount }}</div>
+								<div style="bottom: 10px;float: right;font-size: 12px;">小计￥{{ filmOrder.order_amount }}</div>
 							</div>
 						</div>
 					</div>

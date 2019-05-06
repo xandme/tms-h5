@@ -189,7 +189,7 @@
           confirmSeatSelected(this.form).then(response => {
             // this.$toast.success('订单已生成！')
 							console.log(response);
-							//此处传订单编号影片编号、影院编号
+							//此处传订单编号
             this.$router.push({name: 'payment', query: {filmOrderId: '12',arrangementId: this.aid,hallId:this.hid,filmId:this.filmId}})
           })
           console.log(this.form)
