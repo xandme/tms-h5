@@ -9,11 +9,6 @@
             </svg>
           </router-link>
           <strong id="order-title" style="font-size: 16px;">我的订单</strong>
-          <router-link style="float: right;margin-right: 20px;" to="/search">
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-chazhao2"></use>
-            </svg>
-          </router-link>
         </div>
         <div id="orderHead" class="row text-center" style="color: black;padding-bottom: 0;">
           <div class="col-xs-3" :class="current===0?'active-border':''"
@@ -59,7 +54,8 @@
                 </div>
               </div>
               <div class="row">
-                <div class="col-xs-12" style="font-size: 13px;">订单总价：￥{{ item.orderAmount }}</div>
+                <div class="col-xs-6" style="font-size: 13px;">订单总价：￥{{ item.orderAmount }}</div>
+                <div class="" style="float: right;margin-right: 15px;">{{ item.createdTime }}</div>
               </div>
             </div>
           </van-list>

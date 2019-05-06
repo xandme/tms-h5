@@ -36,7 +36,7 @@
       <div class="container">
         <div class="row text-center">
           <div class="col-xs-12" style="height: 50px;line-height: 50px;" @click="handleConfirm"><b>￥<span
-            id="total_price">0</span></b>确认选座
+            id="total_price">{{ computeTicketPrice }}</span></b>确认选座
           </div>
         </div>
       </div>
@@ -56,6 +56,7 @@
         hid: undefined,
         film: '',
         arrangement: '',
+        price: 0,
         list: [],
         unList: [],
         form: {
@@ -64,7 +65,13 @@
           hallId: undefined,
           totalAmount: 0,
           price: 0
-        }
+        },
+        quantity: 0
+      }
+    },
+    computed: {
+      computeTicketPrice(){
+        return this.price*this.quantity
       }
     },
     created() {
@@ -80,7 +87,7 @@
         console.log('111');
         console.log(this.list);
         const _this = this
-        var price = 100; //电影票的单价
+        var price = this.price; //电影票的单价
         var $cart = $('#seats_chose'), //座位区
           $tickects_num = $('#tickects_num'), //票数
           $total_price = $('#total_price'); //电影票总价格
@@ -122,12 +129,14 @@
                 .appendTo($cart);
               $tickects_num.text(sc.find('selected').length + 1); //统计选票数量
               $total_price.text(getTotalPrice(sc) + price);//计算票价总金额
+              _this.quantity++
               return 'selected';
             } else if (this.status() === 'selected') { //若为选中状态
               $tickects_num.text(sc.find('selected').length - 1);//更新票数量
               $total_price.text(getTotalPrice(sc) - price);//更新票价总金额
               $('#cart-item-' + this.settings.id).remove();//删除已预订座位
               _this.removeSelectedSeat(this.settings.id)
+              _this.quantity--
               return 'available';
             } else if (this.status() === 'unavailable') { //若为已售出状态
               return 'unavailable';
@@ -175,10 +184,13 @@
         if (this.form.selectedList.length < 1) {
           this.$toast('您还未选择座位！')
         } else {
+          this.form.totalAmount = this.computeTicketPrice
+          this.form.price = this.price
           confirmSeatSelected(this.form).then(response => {
             this.$toast.success('订单已生成！')
             this.$router.push('/personal')
           })
+          console.log(this.form)
         }
       },
       getFilm(id) {
@@ -189,6 +201,7 @@
       getArrangement(id) {
         getArrangementDetail(id).then(response => {
           this.arrangement = response.extra
+          this.price = this.arrangement.price
         })
       }
     }

@@ -29,19 +29,19 @@
         <div id="member_info" class="col-xs-12 list-group" style="padding: 0 0 30px;margin: 0;">
           <div class="list-group-item">
             <span>卡余额</span>
-            <span class="text-right my-middle-list" style="">member_info.balance</span>
+            <span class="text-right my-middle-list" style="">{{memberInfo.balance}}</span>
           </div>
           <div class="list-group-item">
             <span>累计充值</span>
-            <span class="text-right my-middle-list" style="">member_info.totalRecharge</span>
+            <span class="text-right my-middle-list" style="">{{memberInfo.totalRecharge}}</span>
           </div>
           <div class="list-group-item">
             <span>折扣等级</span>
-            <span class="text-right my-middle-list" style="">member_type.discount</span>
+            <span class="text-right my-middle-list" style="">{{memberInfo.discount}}</span>
           </div>
           <div class="list-group-item">
             <span>累计节省</span>
-            <span class="text-right my-middle-list" style="">member_info.totalSave</span>
+            <span class="text-right my-middle-list" style="">{{memberInfo.totalSave}}</span>
           </div>
           <a class="list-group-item">
             <span>修改密码</span>
@@ -65,8 +65,27 @@
 </template>
 
 <script>
+  import {getDetail} from "@/api/member_info";
+
   export default {
-    name: "memberDetail"
+    name: "memberDetail",
+    data() {
+      return {
+        memberInfo: '',
+        memberId: undefined
+      }
+    },
+    created() {
+      this.memberId = this.$route.query.id
+      this.getMemberDetail()
+    },
+    methods: {
+      getMemberDetail() {
+        getDetail(this.memberId).then(response => {
+          this.memberInfo = response.extra
+        })
+      }
+    }
   }
 </script>
 
