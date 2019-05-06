@@ -4,7 +4,7 @@
       <div id="home-head" class="container-fluid">
         <div class="row text-center">
           <div class="col-xs-3">
-            <a href="#">重庆▼</a>
+            <router-link to="/theater">重庆▼</router-link>
           </div>
           <strong style="font-size: 16px;margin-left: -25px;">竖店影视</strong>
           <router-link style="float: right;margin-right: 20px;" to="/search">
@@ -62,22 +62,6 @@
         </div>
       </div>
     </div>
-    <div id="theaterBody" class="container-fluid" style="padding-top: 27px;padding-bottom: 50px;display: none;">
-      <div class="row">
-        <div id="home-theater-list" class="col-xs-12 list-group my-list-group">
-          <van-list v-model="list[2].loading" :finished="list[2].finished" finished-text="没有更多了" @load="onLoad(2)">
-            <div v-for="item in list[2].items" :key="item.theaterId">
-              <a class="list-group-item row">
-                <div class="col-xs-12">{{ item.theaterName }}</div>
-                <div class="col-xs-12" style="font-size: 11px;">{{ item.theaterAddress }}</div>
-                <div class="col-xs-12">{{ item.phoneNumber }}</div>
-                <div class="col-xs-12">收藏标记</div>
-              </a>
-            </div>
-          </van-list>
-        </div>
-      </div>
-    </div>
     <nav class="navbar navbar-default navbar-fixed-bottom">
       <div class="container">
         <ul id="bottom-bar" class="nav navbar-inner navbar-nav text-center" style="margin: 0 -15px;">
@@ -113,7 +97,6 @@
 
 <script>
   import {fetchList} from "@/api/film_info"
-  import {fetchList as fetchTheaterList} from "@/api/theater_info"
 
   export default {
     name: "index",
@@ -142,16 +125,6 @@
             total: undefined,
             status: 0
           }
-        }, {
-          items: [],
-          loading: false,
-          finished: false,
-          listQuery: {
-            page_no: 0,
-            page_size: 10,
-            page_total: undefined,
-            total: undefined
-          }
         }]
       }
     },
@@ -176,43 +149,22 @@
     },
     methods: {
       getList(index) {
-        let list = this.list[index]
-        list.listQuery.page_no = list.listQuery.page_no + 1
-        if (index !== 2) {
-          fetchList(list.listQuery).then(response => {
-              console.log('here')
-              console.log(response)
-              list.items = list.items.concat(response.extra.data)
-              list.listQuery.page_total = response.extra.page_total
-              list.listQuery.total = response.extra.total
-              list.listQuery.page_no++
-              // 加载状态结束
-              list.loading = false
-              // 数据全部加载完成
-              if (list.listQuery.page_no >= list.listQuery.page_total) {
-                list.finished = true
-              }
+        let list = this.list[index];
+        list.listQuery.page_no = list.listQuery.page_no + 1;
+        fetchList(list.listQuery).then(response => {
+            console.log(response);
+            list.items = list.items.concat(response.extra.data);
+            list.listQuery.page_total = response.extra.page_total;
+            list.listQuery.total = response.extra.total;
+            list.listQuery.page_no++;
+            // 加载状态结束
+            list.loading = false;
+            // 数据全部加载完成
+            if (list.listQuery.page_no >= list.listQuery.page_total) {
+              list.finished = true;
             }
-          )
-        } else {
-          fetchTheaterList(list.listQuery).then(response => {
-              console.log('there')
-              console.log(response)
-              list.items = list.items.concat(response.extra.data)
-              list.listQuery.page_total = response.extra.page_total
-              list.listQuery.total = response.extra.total
-              list.listQuery.page_no++
-              // 加载状态结束
-              list.loading = false
-              // 数据全部加载完成
-              if (list.listQuery.page_no >= list.listQuery.page_total) {
-                list.finished = true
-              }
-            }
-          )
-        }
-        console.log("???")
-        console.log(this.list[index])
+          }
+        )
       },
       onLoad(index) {
         setTimeout(() => {
