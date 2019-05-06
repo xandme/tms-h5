@@ -147,7 +147,7 @@
         }
       },
       handleOrder(index) {
-        this.$router.push({name:'/orderAll',query:{index: index}})
+        this.$router.push({name:'orderAll',query:{index: index}})
       }
     }
   }
