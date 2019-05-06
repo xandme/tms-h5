@@ -26,9 +26,9 @@ export default new Router({
       component: () => import('@/components/common/theater')
     },
     {
-      path: '/theaterList',
-      name: 'theaterList',
-      component: () => import('@/components/common/theaterList')
+      path: '/payment',
+      name: 'payment',
+      component: () => import('@/components/common/payment')
     },
     {
       path: '/arrangementList',

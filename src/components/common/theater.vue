@@ -3,11 +3,11 @@
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container" style="margin-top:15px;">
         <div class="row text-center">
-          <router-link class="col-xs-1" to="/market">
+          <div class="col-xs-1" @click="handleBack">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-fanhui"></use>
             </svg>
-          </router-link>
+          </div>
           <strong id="title" style="font-size: 16px;">影城列表</strong>
         </div>
       </div>
@@ -68,6 +68,9 @@
             }
         )
       },
+			handleBack() {
+					this.$router.go(-1)
+			},
       onLoad() {
         setTimeout(() => {
           this.getList();

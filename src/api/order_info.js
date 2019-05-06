@@ -23,3 +23,10 @@ export function confirmSeatSelected(data) {
     data
   })
 }
+
+export function getOrderDetail(id) {
+    return request({
+        url: '/order/' + id + '/detail',
+        method: 'get'
+    })
+}

@@ -4,7 +4,7 @@
       <div id="home-head" class="container-fluid">
         <div class="row text-center">
           <div class="col-xs-3">
-            <router-link to="/theater">重庆▼</router-link>
+            <router-link to="/theater">南岸店▼</router-link>
           </div>
           <strong style="font-size: 16px;margin-left: -25px;">竖店影视</strong>
           <router-link style="float: right;margin-right: 20px;" to="/search">
@@ -16,15 +16,6 @@
         <div id="filmHead" class="row text-center" style="color: #0f0f0f;padding-bottom: 0;">
           <div class="col-xs-6" :class="current==0?'active-border':''" @click="handleTab(1,0)">正在热映</div>
           <div class="col-xs-6" :class="current==1?'active-border':''" @click="handleTab(0,1)">即将上映</div>
-        </div>
-        <div id="theaterHead" class="row text-center" style="color: #0f0f0f;display: none;">
-          <div class="col-xs-6" style="padding-bottom: 10px;">全城
-            <small>▼</small>
-          </div>
-          <div class="col-xs-6">价格
-            <small>▼</small>
-          </div>
-          <div></div>
         </div>
       </div>
     </nav>
