@@ -70,6 +70,11 @@ export default new Router({
       name: 'member',
       component: () => import('@/components/personal/member')
     },
+		{
+				path: '/member/add',
+				name: 'addMember',
+				component: () => import('@/components/personal/addMember')
+		},
     {
       path: '/member/detail',
       name: 'memberDetail',

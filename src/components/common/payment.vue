@@ -63,7 +63,7 @@
 			<div class="container">
 				<ul id="pay_btn" class="nav navbar-inner navbar-nav text-center" style="margin: 0 -15px;">
 					<li class="col-xs-6">
-						<div>取消订单</div>
+						<div @click="deleteOrder">取消订单</div>
 					</li>
 					<li class="col-xs-6">
 						<div>确认付款</div>
@@ -129,6 +129,10 @@
                     this.list = response.extra
                 })
             },
+            deleteOrder(){
+                //将订单状态改为已取消（已失效），然后if(order_status!=0&&order_status!=1)时，退回卡余额(退不退余额不重要，主要是没记录用哪种卡付款)，
+								this.$router.push('/personal');
+						},
             handleBack() {
                 this.$router.go(-1)
             }

@@ -9,7 +9,7 @@
             </svg>
           </router-link>
           <strong id="title" style="font-size: 16px;">我的会员卡</strong>
-          <router-link class="col-xs-1" style="margin-right: 20px;float: right;" to="/setting">
+          <router-link class="col-xs-1" style="margin-right: 20px;float: right;" to="/member/add">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-jiahao1"></use>
             </svg>

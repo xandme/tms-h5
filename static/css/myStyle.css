@@ -331,4 +331,31 @@ span.seatCharts-legendDescription {margin-left: 5px;line-height: 30px;}
     border-radius: 5px;
     color: white;
 }
-
+#member_list {
+    border-radius: 0;
+}
+#member_list > .list-group-item {
+    padding: 0;
+}
+#member_list > .list-group-item > input {
+    border: none;
+    height: 50px;
+    padding: 6px 12px 6px 70px;
+    border-radius: 0;
+    /*width: 300px;*/
+    /*margin-left: 60px;*/
+}
+#member_list .icon {
+    position: absolute;
+    top: 15px;
+    left: 30px;
+}
+#add-member-btn {
+    background-color: #11a3f2;
+    border-color: #11a3f2;
+    color: white;
+    border-radius: 2px;
+    opacity: 0.65;
+    margin: 20px;
+    width: 320px;
+}
