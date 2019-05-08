@@ -14,7 +14,7 @@ Vue.config.productionTip = false
 
 Vue.use(Toast)
 Vue.use(Vant)
-Vue.use(ElementUI)
+// Vue.use(ElementUI)
 
 Vue.filter('sexFilter', function (value) {
 	if (!value) {
