@@ -22,7 +22,7 @@
 							<svg class="icon" aria-hidden="true">
 								<use xlink:href="#icon-qia"></use>
 							</svg>
-							<input type="number" v-model="memberForm.number" placeholder="会员卡卡号" class="form-control no-border">
+							<input type="number" v-model="memberForm.number" placeholder="会员卡卡号"  class="form-control no-border">
 						</div>
 						<div class="list-group-item">
 							<svg class="icon" aria-hidden="true">
@@ -43,7 +43,7 @@
 							<input type="number" v-model="memberForm.checkCode" placeholder="验证码" class="form-control no-border">
 						</div>
 					</div>
-					<button id="add-member-btn" type="submit" class="btn btn-block" onclick="">绑定会员卡</button>
+					<button id="add-member-btn" type="submit" class="btn btn-block" @click="memberAdd">绑定会员卡</button>
 				</form>
 			</div>
 			<div class="row text-center" style="font-size: 12px;color: #a4a4a4;">*登录后绑定影城会员卡,可享受会员卡价格!</div>
@@ -77,6 +77,11 @@
 						{required: true, message: '请输入验证码', trigger: 'blur'}
 					]
 				}
+			}
+		},
+		methods: {
+			memberAdd() {
+					console.log(this.memberForm.number);
 			}
 		}
 	}
