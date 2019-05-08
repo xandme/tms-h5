@@ -4,7 +4,7 @@
       <div class="container-fluid">
         <div class="navbar-header">
           <div class="row text-center">
-		    <router-link to="/setting" class="col-xs-1 set">
+		    <router-link to="/personal/info" class="col-xs-1 set">
               <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-shezhi"></use>
               </svg>
