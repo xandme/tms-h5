@@ -15,7 +15,7 @@
     <div class="container-fluid" style="padding: 60px 15px;">
       <div class="row">
         <van-list v-model="list[0].loading" :finished="list[0].finished" finished-text="没有更多了" @load="onLoad()">
-          <div v-for="item in list[0].items" :key="item.theaterId">
+          <div v-for="item in list[0].items" :key="item.theaterId" @click="updateDefaultTheater(item.theaterId)">
             <a class="list-group-item row">
               <div class="col-xs-12">{{ item.theaterName }}</div>
               <div class="col-xs-12" style="font-size: 11px;">{{ item.theaterAddress }}</div>
@@ -30,7 +30,7 @@
 </template>
 
 <script>
-  import {fetchList as fetchTheaterList} from "@/api/theater_info"
+  import {fetchList as fetchTheaterList, getTheaterDefault} from "@/api/theater_info"
 
   export default {
     name: "Theater",
@@ -54,27 +54,34 @@
         const list = this.list[0];
         list.listQuery.page_no = list.listQuery.page_no + 1;
         fetchTheaterList(list.listQuery).then(response => {
-              console.log(response);
-              list.items = list.items.concat(response.extra.data);
-              list.listQuery.page_total = response.extra.page_total;
-              list.listQuery.total = response.extra.total;
-              list.listQuery.page_no++;
-              // 加载状态结束
-              list.loading = false;
-              // 数据全部加载完成
-              if (list.listQuery.page_no >= list.listQuery.page_total) {
-                list.finished = true;
-              }
+            console.log(response);
+            list.items = list.items.concat(response.extra.data);
+            list.listQuery.page_total = response.extra.page_total;
+            list.listQuery.total = response.extra.total;
+            list.listQuery.page_no++;
+            // 加载状态结束
+            list.loading = false;
+            // 数据全部加载完成
+            if (list.listQuery.page_no >= list.listQuery.page_total) {
+              list.finished = true;
             }
+          }
         )
       },
-			handleBack() {
-					this.$router.go(-1)
-			},
+      handleBack() {
+        this.$router.go(-1)
+      },
       onLoad() {
         setTimeout(() => {
           this.getList();
         }, 1000)
+      },
+      updateDefaultTheater(id) {
+        getTheaterDefault(id).then(response => {
+          this.defaultTheater = response.extra
+          this.$store.dispatch('GetTheater', this.defaultTheater)
+          this.$router.push("/")
+        })
       }
     }
   }

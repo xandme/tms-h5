@@ -9,11 +9,6 @@
 						</svg>
 					</div>
 					<strong style="font-size: 16px;">确认订单</strong>
-					<a style="margin-right: 20px;float: right;" @click="favorite">
-						<svg class="icon" aria-hidden="true">
-							<use xlink:href="#icon-shoucang2" id="favor"></use>
-						</svg>
-					</a>
 				</div>
 			</div>
 		</nav>

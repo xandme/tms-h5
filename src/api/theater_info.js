@@ -22,18 +22,19 @@ export function getTheaterDetail(id) {
   })
 }
 
-export function getArrangementDate(id) {
+export function getArrangementDate(id, theaterId) {
   return request({
     url: '/theaterinfo/arrangement/' + id + '/date',
-    method: 'get'
+    method: 'get',
+    params: {'theater_id': theaterId}
   })
 }
 
-export function getHallList(id, date) {
+export function getHallList(id, date, theaterId) {
   return request({
     url: '/theaterinfo/hall/' + id + '/list',
     method: 'get',
-    params: {'date': date}
+    params: {'date': date, 'theater_id': theaterId}
   })
 }
 
@@ -50,5 +51,13 @@ export function getArrangementDetail(id) {
     url: '/theaterinfo/arrangement/' + id + '/detail',
     method: 'get',
     params: {'arrangement_id': id}
+  })
+}
+
+export function getTheaterDefault(id) {
+  return request({
+    url: '/theaterinfo/default',
+    method: 'get',
+    params: {'id': id}
   })
 }

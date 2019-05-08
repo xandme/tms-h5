@@ -3,8 +3,9 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import store from './store'
 
-import { Toast } from 'vant'
+import {Toast} from 'vant'
 
 import Vant from 'vant'
 import 'vant/lib/index.css'
@@ -18,6 +19,7 @@ Vue.use(Vant)
 new Vue({
   el: '#app',
   router,
-  components: { App },
+  store,
+  components: {App},
   template: '<App/>'
 });

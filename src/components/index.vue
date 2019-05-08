@@ -4,7 +4,7 @@
       <div id="home-head" class="container-fluid">
         <div class="row text-center">
           <div class="col-xs-3">
-            <router-link to="/theater">南岸店▼</router-link>
+            <router-link to="/theater">{{ defaultTheater.theaterName }}▼</router-link>
           </div>
           <strong style="font-size: 16px;margin-left: -25px;">竖店影视</strong>
           <router-link style="float: right;margin-right: 20px;" to="/search">
@@ -88,6 +88,8 @@
 
 <script>
   import {fetchList} from "@/api/film_info"
+  import {getTheaterDefault} from "@/api/theater_info";
+
 
   export default {
     name: "index",
@@ -96,14 +98,15 @@
         current: 0,
         list: [{
           items: [],
-          loading: false,
+          loading: true,
           finished: false,
           listQuery: {
             page_no: 0,
             page_size: 10,
             page_total: undefined,
             total: undefined,
-            status: 1
+            status: 1,
+            theater_id: ''
           }
         }, {
           items: [],
@@ -116,7 +119,8 @@
             total: undefined,
             status: 0
           }
-        }]
+        }],
+        defaultTheater: ''
       }
     },
     filters: {
@@ -137,6 +141,18 @@
 
       }
 
+    },
+    created() {
+      this.defaultTheater = this.$store.state.theater.info
+      console.log("~!@$%^&")
+      console.log(this.defaultTheater)
+      if (!this.defaultTheater) {
+        this.getDefaultTheater()
+      }
+    },
+    mounted() {
+      this.list[0].listQuery.theater_id = this.defaultTheater.theaterId
+      this.onLoad(0)
     },
     methods: {
       getList(index) {
@@ -183,6 +199,12 @@
         } else {
           this.$router.push({name: 'arrangementList', query: {filmid: item.filmId}})
         }
+      },
+      getDefaultTheater() {
+        getTheaterDefault().then(response => {
+          this.defaultTheater = response.extra
+          this.$store.dispatch('GetTheater', this.defaultTheater)
+        })
       }
     }
   }

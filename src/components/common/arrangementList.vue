@@ -8,7 +8,7 @@
               <use xlink:href="#icon-fanhui"></use>
             </svg>
           </div>
-          <strong style="font-size: 16px;">{{ theater.theaterName }}</strong>
+          <strong style="font-size: 16px;">{{ defaultTheater.theaterName }}</strong>
           <a style="margin-right: 20px;float: right;" @click="favorite">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-shoucang2" id="favor"></use>
@@ -20,8 +20,9 @@
     <div class="container-fluid" style="padding: 60px 15px 0;min-height: 640px;">
       <!--显示影院信息-->
       <div class="row" style="padding: 10px 0;min-height: 70px;">
-        <div class="col-xs-12" style="padding: 3px 15px;">{{ theater.theaterDescription }}</div>
-        <div class="col-xs-12" style="padding: 4px 15px;font-size: 12px;color: #c1c1c1;">{{ theater.theaterAddress }}
+        <div class="col-xs-12" style="padding: 3px 15px;">{{ defaultTheater.theaterDescription }}</div>
+        <div class="col-xs-12" style="padding: 4px 15px;font-size: 12px;color: #c1c1c1;">{{
+          defaultTheater.theaterAddress }}
         </div>
       </div>
       <div class="row" style="padding: 10px 45px;background-color: rgba(113,85,197,0.64);">
@@ -96,20 +97,21 @@
         theater: '',
         arrangementDate: '',
         list: '',
-        current: 0
+        current: 0,
+        defaultTheater: '',
+        theaterId: ''
       }
     },
     created() {
+      this.defaultTheater = this.$store.state.theater.info
+      this.theaterId = this.defaultTheater.theaterId  // 后期需要动态获取，暂时写死
       this.filmId = this.$route.query.filmid;
       const filmId = this.filmId
-      const theaterId = 1  // 后期需要动态获取，暂时写死
       console.log(filmId)
       this.getFilm(filmId)
-      this.getTheater(theaterId)
       this.getDate(filmId)
     },
     mounted() {
-      // this.getList(this.filmId, this.arrangementDate[0].date)
     },
     methods: {
       favorite() {
@@ -122,74 +124,29 @@
           favor.attr("xlink:href", '#icon-shoucang2')
         }
       },
-      getList(index) {
-        const list = this.list[index];
-        list.listQuery.page_no = list.listQuery.page_no + 1;
-        if (index !== 2) {
-          arrangeList(list.listQuery).then(response => {
-              console.log(response);
-              list.items = list.items.concat(response.extra.data);
-              list.listQuery.page_total = response.extra.page_total;
-              list.listQuery.total = response.extra.total;
-              list.listQuery.page_no++;
-              // 加载状态结束
-              list.loading = false;
-              // 数据全部加载完成
-              if (list.listQuery.page_no >= list.listQuery.page_total) {
-                list.finished = true;
-              }
-            }
-          )
-        } else {
-          fetchTheaterList(list.listQuery).then(response => {
-              console.log(response);
-              list.items = list.items.concat(response.extra.data);
-              list.listQuery.page_total = response.extra.page_total;
-              list.listQuery.total = response.extra.total;
-              list.listQuery.page_no++;
-              // 加载状态结束
-              list.loading = false;
-              // 数据全部加载完成
-              if (list.listQuery.page_no >= list.listQuery.page_total) {
-                list.finished = true
-              }
-            }
-          )
-        }
-      },
-      onLoad(index) {
-        setTimeout(() => {
-          this.getList(index)
-        }, 1000)
-      },
       getFilm(id) {
         getFilmDetail(id).then(response => {
           this.film = response.extra
         })
       },
-      getTheater(id) {
-        getTheaterDetail(id).then(response => {
-          this.theater = response.extra
-        })
-      },
       getDate(id) {
-        getArrangementDate(id).then(response => {
+        getArrangementDate(id,this.theaterId).then(response => {
           this.arrangementDate = response.extra
           console.log(response.extra)
           if (response.extra !== null && response.extra.length > 0) {
-            this.getList(id, this.arrangementDate[0].date)
+            this.getList(id, this.arrangementDate[0].date, this.theaterId)
           }
         })
       },
       getList(id, date) {
-        getHallList(id, date).then(response => {
+        getHallList(id, date, this.theaterId).then(response => {
           this.list = response.extra
         })
       },
       handleHall(date, index) {
         this.current = index
         console.log(date)
-        this.getList(this.filmId, date)
+        this.getList(this.filmId, date, this.theaterId)
       },
       handleBack() {
         this.$router.go(-1)
