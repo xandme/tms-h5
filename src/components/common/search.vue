@@ -10,7 +10,7 @@
 					</svg>
 				</span>
             <input type="text" class="form-control" placeholder="搜影片" aria-describedby="search-input" id="sec"
-                   style="border-left: none;height: 35px;" @keyup.enter="submit">
+                   style="border-left: none;height: 35px;" @keyup.enter="submit" v-model.lazy="list.listQuery.key" @change="submit">
             <span class="input-group-addon">
                 <router-link to="/">
                   <span style="padding: 0;color: black;"><span>取消</span></span>
@@ -33,8 +33,8 @@
             </div>
           </div>
           <ul class="history">
-            <li class="list-group-item" v-for="(item,index) in menuHistory" :key="index" @click="clickHist(item)">{{
-              item }}
+            <li class="list-group-item" v-for="(item,index) in menuHistory" :key="index" @click="clickHist(item)">
+							{{item }}
             </li>
           </ul>
         </div>
@@ -85,6 +85,7 @@
         itemName: '',
         menuHistory: '',
         current: 0,
+				message:'',
         list: {
           items: [],
           loading: false,
@@ -158,7 +159,8 @@
       },
       submit() {
         this.recordHist()
-        this.list.listQuery.key = $("#sec").val()
+        // this.list.listQuery.key = $("#sec").val()
+				// this.list.listQuery.key = this.message;
         this.current = 1
         this.resetList()
         this.getSearchList()

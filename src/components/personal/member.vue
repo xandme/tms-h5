@@ -22,8 +22,10 @@
         <div class="col-xs-12 list-group" style="padding: 0 0 30px;margin: 0;">
           <div class="list-group-item" style="padding: 15px 45px;border: none;" v-for="(item,index) in list"
                :key="index" @click="toDetail(item.memberId)">
-            <div class="row" style="" :class="item.memberTypeId==1?'member-1':(item.memberTypeId==2?'member-2':'member-3')">
-              <div class="col-xs-7 member-name-2"><strong style="font-family: 'Bodoni MT'"  v-text="item.memberTypeId==1?'黄金卡':(item.memberTypeId==2?'白金卡':'钻石卡')"></strong></div>
+            <div class="row" style="" :class="'member-'+item.memberTypeId">
+              <div class="col-xs-7 member-name-2">
+								<strong style="font-family: 'Bodoni MT'">{{ item.memberTypeId | memberText }}</strong>
+							</div>
               <div class="col-xs-4">
                 <svg class="icon" aria-hidden="true" style="font-size: 30px;height:100px;width:100px;size: 80px;">
                   <use xlink:href="#icon-huangjinhuiyuan" v-if="item.memberTypeId==1"></use>
@@ -31,7 +33,7 @@
                   <use xlink:href="#icon-zuanshihuiyuan" v-else="item.memberTypeId==3"></use>
                 </svg>
               </div>
-              <div class="col-xs-7">No.{{ item.memberId }}</div>
+              <div class="col-xs-7">No.{{ item.memberId | fillMemberId }}</div>
               <div class="col-xs-5">卡余额:￥{{ item.balance }}</div>
             </div>
           </div>
@@ -54,6 +56,18 @@
     created() {
       this.getList()
     },
+		filters: {
+    	fillMemberId(value) {
+				return (Array(11).join(0) + value).slice(-11);
+			},
+			memberText(value) {
+    		switch (value) {
+					case 1: return '黄金卡';
+					case 2: return '白金卡';
+					case 3: return '钻石卡';
+				}
+			}
+		},
     methods: {
       toDetail(id) {
         this.$router.push({path:'/member/detail',query:{id:id}})
