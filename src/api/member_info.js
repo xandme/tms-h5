@@ -14,3 +14,11 @@ export function getDetail(id) {
     method: 'get'
   })
 }
+
+export function addMember(data) {
+  return request({
+    url: '/member/add',
+    method: 'post',
+    data
+  })
+}

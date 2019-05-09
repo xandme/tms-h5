@@ -15,11 +15,13 @@ service.interceptors.response.use(
     console.log(response)
     // error_code 不为1000抛错
     const res = response.data
-    if (res.error_code !== 1000) {
-      console.log('请求失败')
-      Toast.fail("请求失败")
-    } else {
+    if (res.error_code == 1001) {
+      console.log('')
+      Toast.fail(res.error_msg)
+    } else if (res.error_code == 1000){
       return response.data
+    } else {
+      Toast.fail('请求失败')
     }
   },
   error => {

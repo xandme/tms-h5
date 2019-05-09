@@ -4,7 +4,7 @@
       <div class="container-fluid">
         <div class="navbar-header">
           <div class="row text-center">
-		    <router-link to="/setting" class="col-xs-1 set">
+		    <router-link to="/personal/info" class="col-xs-1 set">
               <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-shezhi"></use>
               </svg>
@@ -24,13 +24,17 @@
         <div class="col-xs-12" style="margin-top: 80px;margin-bottom: 20px;">
           <div class="col-xs-4">
             <img class="img-circle" alt="" style="height: 80px"
-                 src="@/assets/img/img2.jpg">
+                 :src="avatar">
           </div>
           <div class="col-xs-8" style="margin-top: 10px;padding: 0">
-            <div class="col-xs-12">昵称user.nickname</div>
-            <div class="col-xs-12">
+            <div class="col-xs-12" v-if="user!=''">{{ user.nickname }}</div>
+            <div class="col-xs-12" v-if="user" @click="handleLogout">
+              退出
+            </div>
+            <div class="col-xs-12" v-else>
               <router-link to="/login">登录</router-link>
             </div>
+
           </div>
         </div>
       </div>
@@ -133,6 +137,21 @@
 <script>
   export default {
     name: "personal",
+    data(){
+      return {
+        user: '',
+        avatar: '@/assets/img/img2.jpg'
+      }
+    },
+    created() {
+      this.user = JSON.parse(sessionStorage.getItem("user"))
+      if(this.user != "" && this.user !=null){
+        this.avatar = this.user.headPhotoUrl
+      }else{
+        this.user = ''
+      }
+      console.log(this.user.nickname)
+    },
     mounted() {
       window.addEventListener('scroll', this.handleScroll)
     },
@@ -147,7 +166,11 @@
         }
       },
       handleOrder(index) {
-        this.$router.push({name:'/orderAll',query:{index: index}})
+        this.$router.push({name:'orderAll',query:{index: index}})
+      },
+      handleLogout() {
+        sessionStorage.removeItem("user");
+        this.$router.go(0)
       }
     }
   }

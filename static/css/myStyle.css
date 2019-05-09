@@ -233,6 +233,13 @@ a.message {
 .film-info {
     padding-top: 10px;
 }
+.pay-info > .col-xs-12 {
+    font-size: 12px;
+    padding: 0 15px;
+}
+.pay-info {
+    padding-top: 10px;
+}
 #orderHead > .col-xs-3 {
     color: black;
 }
@@ -310,3 +317,45 @@ span.seatCharts-legendDescription {margin-left: 5px;line-height: 30px;}
 
 #seats_chose li{float:left; width:72px; height:26px; line-height:26px; border:1px solid #d3d3d3; background:#f7f7f7; margin:6px; font-size:14px; font-weight:bold; text-align:center}
 
+#pay_btn > li {
+    width: 50%;
+    padding: 0;
+    /*display: flex;*/
+    /*align-items: center;*/
+    /*justify-content: center;*/
+}
+#pay_btn > li > div {
+    background-color: #11a3f2;
+    margin: 5px;
+    padding: 5px;
+    border-radius: 5px;
+    color: white;
+}
+#member_list {
+    border-radius: 0;
+}
+#member_list > .list-group-item {
+    padding: 0;
+}
+#member_list > .list-group-item > input {
+    border: none;
+    height: 50px;
+    padding: 6px 12px 6px 70px;
+    border-radius: 0;
+    /*width: 300px;*/
+    /*margin-left: 60px;*/
+}
+#member_list .icon {
+    position: absolute;
+    top: 15px;
+    left: 30px;
+}
+#add-member-btn {
+    background-color: #11a3f2;
+    border-color: #11a3f2;
+    color: white;
+    border-radius: 2px;
+    opacity: 0.65;
+    margin: 20px;
+    width: 320px;
+}

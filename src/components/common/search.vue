@@ -94,12 +94,14 @@
             page_size: 10,
             page_total: undefined,
             total: undefined,
-            key: ''
+            key: '',
           }
-        }
+        },
+        defaultTheater: ''
       }
     },
     created() {
+      this.defaultTheater = this.$store.state.theater.info
       console.log(1111111111111111);
       this.initLocalStorageArg("hi_001");
       console.log(this.itemName);

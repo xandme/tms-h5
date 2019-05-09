@@ -2,7 +2,7 @@
   <div>
     <div class="row"
          style="background-color:white;position: fixed;z-index:1030;padding: 60px 15px 0;border-bottom:1px solid gray;width: 100%;">
-      <div class="col-xs-12" style="">南岸区竖店电影城.
+      <div class="col-xs-12" style="">{{ defaultTheater.theaterName }}
         <router-link to="/theater">切换</router-link>
       </div>
     </div>
@@ -140,7 +140,8 @@
         cart: {
           list: [],
           totalPrice: 0
-        }
+        },
+        defaultTheater: ''
       }
     },
     computed: {
@@ -156,6 +157,9 @@
       totalNum() {
         return this.cart.list.length
       }
+    },
+    created(){
+      this.defaultTheater = this.$store.state.theater.info
     },
     methods: {
       getList() {
