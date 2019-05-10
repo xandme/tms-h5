@@ -3,7 +3,7 @@
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container" style="margin-top:15px;">
         <div class="row text-center">
-          <router-link to="/personal">
+          <router-link to="/">
             <div class="col-xs-1" style="padding-left: 15px;">
               <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-fanhui"></use>
@@ -83,11 +83,17 @@
           // 		this.$router.push({ path: '/personal' });
           // 	}
           // });
-          getLogin(this.loginForm).then(response => {
-              console.log(response);
-              sessionStorage.setItem('user', JSON.stringify(response.extra));
-              this.$toast.success("登录成功");
-              this.$router.push({path: '/personal'});
+          // getLogin(this.loginForm).then(response => {
+          //   console.log(response.extra);
+          //   const data = response.extra
+          //   this.$store.dispatch('GetUserInfo', data)
+          //   this.$toast.success("登录成功");
+          //   this.$router.push({ path: this.redirect || '/' })
+          // })
+          this.$store.dispatch('GetUserInfo', this.loginForm).then(() => {
+            this.$router.push({path: this.redirect || '/'})
+          }).catch((error) => {
+            this.$toast.fail(error)
           })
         }
       }

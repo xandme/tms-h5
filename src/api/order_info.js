@@ -30,3 +30,10 @@ export function getOrderDetail(id) {
         method: 'get'
     })
 }
+
+export function confirmOrder(id) {
+  return request({
+    url: '/order/' + id + '/confirm',
+    method: 'get'
+  })
+}

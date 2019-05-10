@@ -80,7 +80,7 @@
 <script>
   import {getTheaterDetail, getArrangementDetail} from "@/api/theater_info";
   import {getFilmDetail} from "@/api/film_info";
-  import {getOrderDetail} from "@/api/order_info";
+  import {getOrderDetail, confirmOrder as submitOrder} from "@/api/order_info";
   import {fetchList} from "@/api/member_info";
 
   export default {
@@ -93,7 +93,8 @@
         theater: '',
         arrangement: '',
         filmOrder: '',
-        memberList: []
+        memberList: [],
+        member: ''
       }
     },
     created() {
@@ -130,18 +131,36 @@
       getMemberList() {
         fetchList().then(response => {
           console.log(response)
-          this.list = response.extra
+          this.memberList = response.extra
         })
       },
       deleteOrder() {
         //将订单状态改为已取消（已失效），然后if(order_status!=0&&order_status!=1)时，退回卡余额(退不退余额不重要，主要是没记录用哪种卡付款)，
-        this.$router.push('/personal');
+        this.$dialog.confirm({
+          title: '提示',
+          message: '确认取消订单？'
+        }).then(() => {
+          console.log("跳转到登陆页面")
+          this.$router.push('/personal');
+        }).catch(() => {
+          // on cancel
+        });
       },
       handleBack() {
         this.$router.go(-1)
       },
       confirmOrder() {
-
+        this.$dialog.confirm({
+          title: '提示',
+          message: '确认付款？'
+        }).then(() => {
+          submitOrder(this.orderId).then(res => {
+            this.$toast.success("付款成功")
+            this.$router.push('/personal');
+          })
+        }).catch(() => {
+          // on cancel
+        });
       }
     }
   }

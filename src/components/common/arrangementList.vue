@@ -73,7 +73,7 @@
             <div class="col-xs-2" style="padding: 7px 10px;">
               <router-link
                 :to="{name: 'seatArea', query: {arrangementId: item.arrangementId,hallId:item.filmHallNumber,filmId:item.filmId}}">
-                <button type="button" class="buy-ticket">购票</button>
+                <button type="button" class="buy-ticket">选座</button>
               </router-link>
             </div>
           </div>

@@ -18,6 +18,16 @@
 			<div class="row">
 				<form :model="memberForm" :rules="rules" name="form" class="form-validation">
 					<div id="member_list" class="list-group">
+            <div class="list-group-item">
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-suo"></use>
+              </svg>
+              <select v-model="memberForm.memberTypeId" class="form-control no-border">
+                <option value="1">黄金会员</option>
+                <option value="2">白金会员</option>
+                <option value="3">钻石会员</option>
+              </select>
+            </div>
 						<div class="list-group-item">
 							<svg class="icon" aria-hidden="true">
 								<use xlink:href="#icon-qia"></use>

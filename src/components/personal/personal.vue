@@ -24,7 +24,7 @@
         <div class="col-xs-12" style="margin-top: 80px;margin-bottom: 20px;">
           <div class="col-xs-4">
             <img class="img-circle" alt="" style="height: 80px"
-                 :src="avatar">
+                 :src="user.headPhotoUrl">
           </div>
           <div class="col-xs-8" style="margin-top: 10px;padding: 0">
             <div class="col-xs-12" v-if="user!=''">{{ user.nickname }}</div>
@@ -68,19 +68,19 @@
         <div class="col-xs-12 list-group my-list-group">
           <router-link to="/member" class="list-group-item">
             <span>我的会员卡</span>
-            <span class="text-right my-middle-list" style="">2&nbsp;&nbsp;></span>
+            <span class="text-right my-middle-list" style="">&nbsp;&nbsp;></span>
           </router-link>
           <router-link class="list-group-item" to="/coupon">
             <span>我的优惠券</span>
-            <span class="text-right my-middle-list" style="">8&nbsp;&nbsp;></span>
+            <span class="text-right my-middle-list" style="">&nbsp;&nbsp;></span>
           </router-link>
           <router-link to="/" class="list-group-item">
             <span>想看的电影</span>
-            <span class="text-right my-middle-list" style="">4&nbsp;&nbsp;></span>
+            <span class="text-right my-middle-list" style="">&nbsp;&nbsp;></span>
           </router-link>
           <router-link to="/" class="list-group-item">
             <span>看过的电影</span>
-            <span class="text-right my-middle-list" style="">14&nbsp;&nbsp;></span>
+            <span class="text-right my-middle-list" style="">&nbsp;&nbsp;></span>
           </router-link>
           <router-link to="/" class="list-group-item">
             <span>清理缓存</span>
@@ -144,13 +144,7 @@
       }
     },
     created() {
-      this.user = JSON.parse(sessionStorage.getItem("user"))
-      if(this.user != "" && this.user !=null){
-        this.avatar = this.user.headPhotoUrl
-      }else{
-        this.user = ''
-      }
-      console.log(this.user.nickname)
+      this.user = this.$store.getters.userInfo
     },
     mounted() {
       window.addEventListener('scroll', this.handleScroll)
@@ -169,8 +163,9 @@
         this.$router.push({name:'orderAll',query:{index: index}})
       },
       handleLogout() {
-        sessionStorage.removeItem("user");
-        this.$router.go(0)
+        this.$store.dispatch('FedLogOut').then(() => {
+          this.$router.push({path: this.redirect || '/'})
+        })
       }
     }
   }

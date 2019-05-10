@@ -10,6 +10,8 @@ import {Toast} from 'vant'
 import Vant from 'vant'
 import 'vant/lib/index.css'
 
+import '@/permission'
+
 Vue.config.productionTip = false
 
 Vue.use(Toast)

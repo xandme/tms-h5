@@ -15,7 +15,7 @@
                        @click="handleActiveTab(0)">全部订单
           </div>
           <div class="col-xs-3" :class="current===1?'active-border':''"
-                       @click="handleActiveTab(1)">待付款
+                       @click="handleActiveTab(1)">未付款
           </div>
           <div class="col-xs-3" :class="current===2?'active-border':''"
                        @click="handleActiveTab(2)">待使用
